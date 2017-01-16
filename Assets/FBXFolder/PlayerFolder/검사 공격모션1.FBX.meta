@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1b60ef796e0b01649aa2dd0409c6a452
-timeCreated: 1482129051
+guid: c01c896e18ae2fb4d8909ca545041524
+timeCreated: 1484547015
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -200,7 +200,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 79
+      lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -227,63 +227,63 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.06220503
+      - time: 0.03164557
         functionName: AttackStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.0999531
+      - time: 0.06962025
         functionName: AttackTrue
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.20091422
+      - time: 0.14556962
         functionName: OnAttack_B
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2605954
-        functionName: AttackHit
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.26387715
+      - time: 0.20886075
         functionName: OffAttack_B
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.30028328
+      - time: 0.20253165
+        functionName: AttackHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.25632912
         functionName: AttackEffect_1_Off
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.41935793
+      - time: 0.43987343
         functionName: AttackFalse
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.50389546
+      - time: 0.51898736
         functionName: MoveSpeedCheck
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9804814
+      - time: 0.9462025
         functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}

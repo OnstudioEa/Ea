@@ -293,6 +293,14 @@ public class PlayerControl : MonoBehaviour
           //  skill_2.gameObject.SetActive(true);
         }
     }
+    public void SkillManagerOn()
+    {
+        skillCheck = true;
+    }
+    public void SkillManagerOff()
+    {
+        skillCheck = false;
+    }
     /// <summary>
     /// 애니메이션 이벤트 및 이펙트 관련
     /// </summary>
