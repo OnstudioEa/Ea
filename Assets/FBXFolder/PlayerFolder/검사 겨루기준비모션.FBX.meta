@@ -220,7 +220,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.16197181
+      - time: 0.13732392
         functionName: ActionEffect
         data: 
         objectReferenceParameter: {instanceID: 0}
