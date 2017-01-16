@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public string sceneToLoad;
 
     public GameObject test_BackGround;
-
+    
     public UIPanel ingame_PausePanel;
     void Awake()
     {
