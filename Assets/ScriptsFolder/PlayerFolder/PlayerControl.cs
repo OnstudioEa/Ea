@@ -161,10 +161,12 @@ public class PlayerControl : MonoBehaviour
             playerEffect[12].gameObject.SetActive(false);
             ani.SetBool("Skill1", false);
             ani.SetBool("Skill2", false);
+            ani.SetBool("Hit", false);
             return;
         }
         if (ani.GetBool("Ultimated") == true)
         {
+            ani.SetBool("Hit", false);
             ani.SetBool("Ultimated", false);
             playerAttackData.cam_3.gameObject.SetActive(false);
             playerEffect[9].gameObject.SetActive(false);
