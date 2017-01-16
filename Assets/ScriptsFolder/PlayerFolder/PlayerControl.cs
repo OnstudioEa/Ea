@@ -405,7 +405,6 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Move", false);
         skillCheck = true;
         transform.LookAt(targetMonster.transform);
-        ani.SetBool("Hit", true);
     }
     public void PlayerDefendLook()
     {
@@ -420,6 +419,7 @@ public class PlayerControl : MonoBehaviour
         skillCheck = false;
         motor.moveSpeed = 6;
         ani.SetBool("Hit", false);
+        ani.SetBool("Hit1", false);
         AttackEnd();
     }
     /// <summary>

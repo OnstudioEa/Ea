@@ -201,7 +201,18 @@ public class PlayerDataLoader : Action
         if (ani_Player.GetBool("Defend") == false && ultimateTime <= 0) // 막기상태가 아닐때 데미지를 받는다. [평시]
         {
             if (playerControl.hitCount <= 0)
+            {
                 playerControl.PlayerHitMotion();
+                if (ani_Monster.GetBool("BackAttack") == true || ani_Monster.GetBool("Attack3") == true)
+                {
+                    ani_Player.SetBool("Hit1", true);
+                }
+                else
+                {
+                    ani_Player.SetBool("Hit", true);
+                }
+            }
+
             animationDelay_Player = 2;
             monsterShaderChange_2.rend.sharedMaterial = monsterShaderChange_2.material[1];
             monsterShaderChange_3.rend.sharedMaterial = monsterShaderChange_3.material[1];
