@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a7e743c01bced2d41810c42045cd29b1
-timeCreated: 1484576954
+guid: 893540af9a336b1438953a1798d2fadf
+timeCreated: 1484576948
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -158,7 +158,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 144
+      lastFrame: 234
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -178,36 +178,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.17405063
-        functionName: ShakeCam
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.18670887
-        functionName: AttackDamageTo
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: AttackEnd
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.39873418
-        functionName: ShakeCam
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.4050633
-        functionName: AttackDamageTo
+      - time: 0.6708861
+        functionName: CutAction
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

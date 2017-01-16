@@ -397,9 +397,18 @@ public class PlayerControl : MonoBehaviour
         motor.moveSpeed = 0;
         motor.state = Motor.State.idle;
         ani.SetBool("Move", false);
+        ani.SetBool("Win", false);
+        ani.SetBool("Lose", false);
         skillCheck = true;
-        
+                
         transform.LookAt(targetMonster.transform);
+    }
+    /// <summary>
+    /// 겨루기 검 이펙트
+    /// </summary>
+    public void ActionEffect()
+    {
+        playerEffect[13].gameObject.SetActive(true);
     }
     /// <summary>
     /// 피격모션 시작 이벤트
@@ -443,6 +452,14 @@ public class PlayerControl : MonoBehaviour
         // 이펙트
         playerEffect[7].gameObject.SetActive(true);
         playerEffect[8].gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 플레이어 컷씬
+    /// </summary>
+    public void CutAction()
+    {
+        ani.SetBool("Win", false);
+        ani.SetBool("Lose", false);
     }
 }
 

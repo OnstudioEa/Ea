@@ -338,12 +338,12 @@ public class PlayerDataLoader : Action
     }    
     public void ButtonActionOn()
     {
-        buttonActionGayge += 4;
-        if (buttonActionGayge >= 300)
+        buttonActionGayge += 5;
+        if (buttonActionGayge >= 200)
         {
-            Debug.Log("버튼액션 이김");
+          //  Debug.Log("버튼액션 이김");
             motor.moveSpeed = 7;
-            buttonActionGayge = 0;
+          //  buttonActionGayge = 0;
 
             playerControl.AttackEnd();
             monsterControl.AttackEnd();
@@ -351,14 +351,17 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
-            buttonPanelActive_1.gameObject.SetActive(true);
-            buttonPanelActive_2.gameObject.SetActive(true);
             cam_1.gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
+
+            playerControl.playerEffect[13].gameObject.SetActive(false);
+
+            ani_Player.SetBool("Win", true);
+            ani_Monster.SetBool("Lose", true);
         }
         if (buttonActionGayge <= 0)
         {
-            Debug.Log("버튼액션 짐");
+         //   Debug.Log("버튼액션 짐");
             motor.moveSpeed = 7;
 
             playerControl.AttackEnd();
@@ -371,6 +374,14 @@ public class PlayerDataLoader : Action
             buttonPanelActive_2.gameObject.SetActive(true);
             cam_1.gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
+
+            playerControl.playerEffect[13].gameObject.SetActive(false);
+
+            ani_Monster.SetBool("Win", true);
+            ani_Player.SetBool("Lose", true);
+
+            groggyCount += 1;
+            monsterNowHP = monsterHp * 0.4f;
         }
     }
     /// <summary>
