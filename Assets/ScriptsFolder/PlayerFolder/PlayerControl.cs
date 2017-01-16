@@ -15,6 +15,9 @@ public class PlayerControl : MonoBehaviour
     GameObject weaponeObMin;
     GameObject targetMonster;
     GameObject weaponeSlash;
+
+    Transform target;
+    Transform trans;
            
     float closestDistSqr;
     float dist;
@@ -36,6 +39,7 @@ public class PlayerControl : MonoBehaviour
     List<Action> action = new List<Action>();
 
     PlayerDataLoader        playerAttackData;
+    VirtualJoysticks        virtualjoystick;
     public Motor            motor;
 
     void Awake()
@@ -45,12 +49,16 @@ public class PlayerControl : MonoBehaviour
         ani = GetComponent<Animator>();
 
         playerAttackData = GameObject.Find("GameManager").GetComponent<PlayerDataLoader>();
+        virtualjoystick = GameObject.Find("BackgroundImage").GetComponent<VirtualJoysticks>();
 
         weaponeObMax = GameObject.Find("B");
         weaponeObMin = GameObject.Find("A");
         targetMonster = GameObject.Find("Monster");
         weaponeSlash = GameObject.Find("trail_bone");
-           
+
+        target = targetMonster.transform;
+        trans = gameObject.transform;
+
         weaponeSlash.gameObject.SetActive(false);
         closestDistSqr = Mathf.Infinity;
         distPos = 0.7f;
@@ -118,7 +126,6 @@ public class PlayerControl : MonoBehaviour
             ani.SetBool("Attack1", true);
             ani.SetBool("Attack2", true);
             ani.SetBool("Attack3", true);
-            state = State.attack;
             motor.moveSpeed = 0;
         }
     }
@@ -132,6 +139,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackEnd()
     {
+        state = State.idle;
         // 액션,애니메이션
         skillCheck = false;
         attackCheck = true;
@@ -175,11 +183,13 @@ public class PlayerControl : MonoBehaviour
     }
     public void IdleStart()
     {
+        state = State.idle;
         skillCheck = false;
         weaponeSlash.gameObject.SetActive(false);
     }
     public void AttackTrue()
     {
+        state = State.idle;
         attackCheck = true;
     }
     public void AttackHit()
@@ -215,6 +225,7 @@ public class PlayerControl : MonoBehaviour
     public void DefendStart()
     {
         playerAttackData.playerNowMP -= 5;
+        motor.moveSpeed = 6; // 수치
         skillCheck = true;
         weaponeSlash.gameObject.SetActive(false);
     }
@@ -303,6 +314,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public void AttackEffect_1()
     {
+        state = State.attack;
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 1;
@@ -318,6 +330,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackEffect_2()
     {
+        state = State.attack;
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 2;
@@ -333,6 +346,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackEffect_3()
     {
+        state = State.attack;
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 3;
@@ -344,6 +358,24 @@ public class PlayerControl : MonoBehaviour
         }
         else
             return;
+    }
+    /// <summary>
+    /// 특정 조이스틱 범위위치 공격시 자동타겟
+    /// </summary>
+    public void AttackActionLook()
+    {
+        float dist = Vector3.Distance(target.position, trans.position);
+        if (dist < 1)
+        {
+            if (virtualjoystick.inputVector.z >= 0.6f && virtualjoystick.inputVector.z <= 1.0f)
+            {
+                PlayerDefendLook();
+            }
+            else
+                motor.FaceMovementDirection();
+        }
+        else
+            motor.FaceMovementDirection();
     }
     /// <summary>
     /// 겨루기시 방향

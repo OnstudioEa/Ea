@@ -302,16 +302,15 @@ public class PlayerDataLoader : Action
     {
         if (gorggyAttack_float > 0 && groggyAttack_bool == true)
         {
-            gorggyAttack_float -= 1;            
+            gorggyAttack_float -= 1;
         }
-        else
+        else { 
+        if (gorggyAttack_float <= 0 && groggyAttack_bool == true)
         {
-            if (gorggyAttack_float <= 0)
-            {
                 if (ani_Monster.GetBool("Groggy") == true && groggyAttack_bool == true)
                 {
                     float dist = Vector3.Distance(player_OB.position, monster_OB.position);
-                    if (dist < 1)
+                    if (dist <= 1)
                     {
                         ani_Monster.SetBool("GroggyAttack", true);
                         playerControl.AttackLook();
@@ -325,7 +324,7 @@ public class PlayerDataLoader : Action
                 }
             }
         }
-    }
+    }    
     public void ButtonActionOn()
     {
         buttonActionGayge += 4;
@@ -478,17 +477,24 @@ public class PlayerDataLoader : Action
     /// </summary>
     void AttackDamage_Monster()
     {
-        critical_Check_Monster = Random.Range(1, 11);
-        if (critical_Check_Monster <= 1)
+        if (ani_Player.GetBool("Skill1") == true || ani_Player.GetBool("Skill2") == true)
         {
-            critical_Damage_Monster = Random.Range(2, 3.5f);
-            playerNowHP -= (monsterPower * critical_Damage_Monster);
-            return;
+            playerNowHP -= monsterPower / 2;
         }
         else
         {
-            playerNowHP -= monsterPower;
-            return;
+            critical_Check_Monster = Random.Range(1, 11);
+            if (critical_Check_Monster <= 1)
+            {
+                critical_Damage_Monster = Random.Range(2, 3.5f);
+                playerNowHP -= (monsterPower * critical_Damage_Monster);
+                return;
+            }
+            else
+            {
+                playerNowHP -= monsterPower;
+                return;
+            }
         }
     }
     /// <summary>
@@ -524,7 +530,7 @@ public class PlayerDataLoader : Action
         else if (monsterNowHP <= monsterHp * 0.2f && groggyCount == 1)
         {
             ani_Monster.SetBool("Groggy", true);
-            gorggyAttack_float = 30;
+            gorggyAttack_float = 15;
             groggyAttack_bool = true;
             //groggyCount -= 1;
             return;

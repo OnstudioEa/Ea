@@ -47,7 +47,12 @@ public class Motor : MonoBehaviour
             if (playerControl.ani.GetBool("AttackMove"))
             {
                 CamRotote();
-                FaceMovementDirection();
+                if (playerControl.state == global::State.attack)
+                {
+                    playerControl.AttackActionLook();
+                }
+                else
+                    FaceMovementDirection();
             }
         }
         yield return new WaitForEndOfFrame();
@@ -61,7 +66,7 @@ public class Motor : MonoBehaviour
         controller.AddForce(rotatedDir * moveSpeed);
         
     }
-    private void FaceMovementDirection()
+    public void FaceMovementDirection()
     {
         Vector3 horizontalVelocity = controller.velocity;
         horizontalVelocity = rotatedDir;

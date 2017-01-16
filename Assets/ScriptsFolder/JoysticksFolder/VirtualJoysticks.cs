@@ -47,11 +47,7 @@ public class VirtualJoysticks : MonoBehaviour, IDragHandler, IPointerUpHandler, 
 
                     joystickImg.rectTransform.anchoredPosition = new Vector3(inputVector.x * (bgImg.rectTransform.sizeDelta.x * 0.3f)
                                                                             , inputVector.z * (bgImg.rectTransform.sizeDelta.y * 0.3f)); //스틱이동범위
-                    if (inputVector.z >= 0.8f && inputVector.z <= 1.0f)
-                    {
-                        Debug.Log("Test");
-                    }
-                    Debug.Log(inputVector);
+                    
                 }
             }
         }            
