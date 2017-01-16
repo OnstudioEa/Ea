@@ -22,7 +22,7 @@ public class PlayerDataLoader : Action
 
     public int playerLevel;
     public int playerHp;
-    public int playerPower;
+    public float playerPower;
 
     public int testMonNumber;
 
@@ -79,7 +79,7 @@ public class PlayerDataLoader : Action
     public float skillDelayTime_2;
     //-------------------------------------------------그로기시스템 관련
     int groggyCount;
-    int parts_HP;
+    float parts_HP;
     int parts_Count;
     public int buttonActionGayge;
     public GameObject partsOb;
@@ -387,7 +387,7 @@ public class PlayerDataLoader : Action
             }
             if (ultimateTime <= 0)
             {
-                playerPower = playerPower / 2;
+                playerPower = playerPower * 0.5f;
                 ani_Player.speed = 1f;
 
                 monsterShaderChange_2.rend.sharedMaterial = monsterShaderChange_2.material[0];
@@ -444,7 +444,8 @@ public class PlayerDataLoader : Action
                 }
                 else
                 {
-                    monsterNowHP -= playerPower;
+                    critical_Damage = Random.Range(0.8f, 1.0f);
+                    monsterNowHP -= (playerPower * critical_Damage);
                     //Debug.Log("평타");
                 }
                 return;
@@ -490,14 +491,14 @@ public class PlayerDataLoader : Action
     {
         if (ani_Player.GetBool("Skill1") == true || ani_Player.GetBool("Skill2") == true)
         {
-            playerNowHP -= monsterPower / 2;
+            playerNowHP -= monsterPower * 0.5f;
         }
         else
         {
             critical_Check_Monster = Random.Range(1, 11);
             if (critical_Check_Monster <= 1)
             {
-                critical_Damage_Monster = Random.Range(2, 3.5f);
+                critical_Damage_Monster = Random.Range(1.5f, 2.5f);
                 playerNowHP -= (monsterPower * critical_Damage_Monster);
                 return;
             }
