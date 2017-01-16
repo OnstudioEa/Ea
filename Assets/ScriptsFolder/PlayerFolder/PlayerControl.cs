@@ -200,7 +200,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void MoveSpeedCheck()
     {
-        motor.moveSpeed = 6;
+        motor.moveSpeed = 7;
     }
     public void MoveSpeedCheckOff()
     {
@@ -227,7 +227,7 @@ public class PlayerControl : MonoBehaviour
     public void DefendStart()
     {
         playerAttackData.playerNowMP -= 5;
-        motor.moveSpeed = 6; // 수치
+        motor.moveSpeed = 7; // 수치
         skillCheck = true;
         weaponeSlash.gameObject.SetActive(false);
     }
@@ -248,7 +248,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Attack3", false);
         playerEffect[3].gameObject.SetActive(false);
 
-        motor.moveSpeed = 6; // 수치
+        motor.moveSpeed = 7; // 수치
     }
     /// <summary>
     /// 스킬 버튼
@@ -275,7 +275,7 @@ public class PlayerControl : MonoBehaviour
             defend_Coll.enabled = false;
             playerAttackData.skillDelayTime_2 = 18;
 
-            motor.moveSpeed = 6;
+            motor.moveSpeed = 7;
             ani.SetBool("AttackMove", true);
         }
     }
@@ -425,7 +425,7 @@ public class PlayerControl : MonoBehaviour
     {
         hitCount = 15;
         skillCheck = false;
-        motor.moveSpeed = 6;
+        motor.moveSpeed = 7;
         ani.SetBool("Hit", false);
         ani.SetBool("Hit1", false);
         AttackEnd();

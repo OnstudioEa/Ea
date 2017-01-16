@@ -342,7 +342,7 @@ public class PlayerDataLoader : Action
         if (buttonActionGayge >= 300)
         {
             Debug.Log("버튼액션 이김");
-            motor.moveSpeed = 6;
+            motor.moveSpeed = 7;
             buttonActionGayge = 0;
 
             playerControl.AttackEnd();
@@ -359,7 +359,7 @@ public class PlayerDataLoader : Action
         if (buttonActionGayge <= 0)
         {
             Debug.Log("버튼액션 짐");
-            motor.moveSpeed = 6;
+            motor.moveSpeed = 7;
 
             playerControl.AttackEnd();
             monsterControl.AttackEnd();
@@ -542,7 +542,7 @@ public class PlayerDataLoader : Action
         else if (monsterNowHP <= monsterHp * 0.2f && groggyCount == 1)
         {
             ani_Monster.SetBool("Groggy", true);
-            gorggyAttack_float = 15;
+            gorggyAttack_float = 13;
             groggyAttack_bool = true;
             //groggyCount -= 1;
             return;

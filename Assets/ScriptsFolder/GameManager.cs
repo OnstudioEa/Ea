@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public UIPanel ingame_PausePanel;
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 45;
        // frameCheck.gameObject.SetActive(false);
         state = State.idle;
         StartCoroutine(FSM());
