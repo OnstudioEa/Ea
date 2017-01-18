@@ -33,9 +33,13 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject[] playerEffect;
 
-    public int attackCount_Effect;
+    public AudioClip[]  player_Sound;
+    int                 player_Sound_Count;
+    AudioClip test;
 
-    public GameObject taggedAction;
+    public int          attackCount_Effect;
+
+    public GameObject   taggedAction;
     List<Action> action = new List<Action>();
 
     PlayerDataLoader        playerAttackData;
@@ -62,7 +66,7 @@ public class PlayerControl : MonoBehaviour
         weaponeSlash.gameObject.SetActive(false);
         closestDistSqr = Mathf.Infinity;
         distPos = 0.7f;
-
+        
         CheckList();
         ani.SetBool("AttackMove", true);
     }
@@ -199,6 +203,7 @@ public class PlayerControl : MonoBehaviour
     public void AttackHit()
     {
         TargetCheck();
+        PlayerSound();
     }
     public void MoveSpeedCheck()
     {
@@ -420,7 +425,8 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
         skillCheck = true;
-                
+        Handheld.Vibrate();
+
         transform.LookAt(targetMonster.transform);
     }
     /// <summary>
@@ -483,6 +489,18 @@ public class PlayerControl : MonoBehaviour
     {
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
+    }
+    /// <summary>
+    /// 공격 사운드 관련
+    /// </summary>
+    public void PlayerSound()
+    {
+        player_Sound_Count = Random.Range(0, 2);
+        if (player_Sound_Count == 0)
+            AudioSource.PlayClipAtPoint(player_Sound[0], trans.position);
+        else
+            if (player_Sound_Count == 1)
+            AudioSource.PlayClipAtPoint(player_Sound[1], trans.position);
     }
 }
 

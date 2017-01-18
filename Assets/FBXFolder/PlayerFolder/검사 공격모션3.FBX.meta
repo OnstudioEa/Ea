@@ -262,6 +262,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.42209634
+        functionName: AttackTrue
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5012921
         functionName: AttackFalse
         data: 
@@ -278,13 +285,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.9683546
         functionName: AttackEnd
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.42209634
-        functionName: AttackTrue
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
