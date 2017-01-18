@@ -20,6 +20,7 @@ public class SanctumScript : MonoBehaviour {
         dungeon_Panel.gameObject.SetActive(false);
 
 	}
+    
     public void StageStartButton()
     {
         start_Panel.gameObject.SetActive(false);

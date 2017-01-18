@@ -143,6 +143,7 @@ public class PlayerControl : MonoBehaviour
         // 액션,애니메이션
         skillCheck = false;
         attackCheck = true;
+        defendCheck = false;
         ani.SetBool("AttackMove", true);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
@@ -180,6 +181,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
         attackCheck = false;
+        defendCheck = false;
         skillCheck = false;
         ani.SetBool("AttackMove", true);
     }
@@ -210,7 +212,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (ani.GetBool("Defend") == false && playerAttackData.playerNowMP > 5)
         {
-            ani.SetBool("Defend", true);            
+            ani.SetBool("Defend", true);
+            ani.SetBool("AttackMove", true);
         }
     }
     /// <summary>
@@ -218,24 +221,31 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     public void DefendButtonOff()
     {
-        ani.SetBool("AttackMove", true); // 애니메이션
         ani.SetBool("Defend", false);
+        if (motor.state == Motor.State.idle)
+        {
+            ani.SetBool("AttackMove", true);
+            defendCheck = false;
+        }
     }
     /// <summary>
     /// 구르기
     /// </summary>
     public void DefendStart()
     {
+        defendCheck = true;
         playerAttackData.playerNowMP -= 5;
         motor.moveSpeed = 7; // 수치
         skillCheck = true;
         weaponeSlash.gameObject.SetActive(false);
+        playerEffect[0].gameObject.SetActive(false);
     }
     /// <summary>
     ///  막기
     /// </summary>
     public void DefendStart_1()
     {
+        defendCheck = true;
         weaponeSlash.gameObject.SetActive(false);
         attackCheck = true;
         attackCount_Effect = 1;
@@ -249,6 +259,15 @@ public class PlayerControl : MonoBehaviour
         playerEffect[3].gameObject.SetActive(false);
 
         motor.moveSpeed = 7; // 수치
+    }
+    public void DefendCollOn()
+    {
+        defend_Coll.enabled = true;
+    }
+    public void DefendCollOff()
+    {
+        if (motor.state == Motor.State.move)
+            defend_Coll.enabled = false;
     }
     /// <summary>
     /// 스킬 버튼
@@ -314,10 +333,7 @@ public class PlayerControl : MonoBehaviour
     public void OffAttack_B()
     {
         weaponeSlash.gameObject.SetActive(false);
-    }
-    public void AttackEffect_1_Off()
-    {
-        playerEffect[0].gameObject.SetActive(false);
+        DefendCollOn();
     }
     /// <summary>
     /// 이펙트 관련
@@ -325,6 +341,7 @@ public class PlayerControl : MonoBehaviour
     public void AttackEffect_1()
     {
         state = State.attack;
+        DefendCollOff();
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 1;
@@ -341,6 +358,7 @@ public class PlayerControl : MonoBehaviour
     public void AttackEffect_2()
     {
         state = State.attack;
+        DefendCollOff();
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 2;
@@ -357,6 +375,7 @@ public class PlayerControl : MonoBehaviour
     public void AttackEffect_3()
     {
         state = State.attack;
+        DefendCollOff();
         if (playerAttackData.ultimateTime > 0)
         {
             attackCount_Effect = 3;
@@ -364,6 +383,7 @@ public class PlayerControl : MonoBehaviour
             {
                 playerEffect[2].gameObject.SetActive(true);
                 playerEffect[4].gameObject.SetActive(false);
+                playerEffect[0].gameObject.SetActive(false);
             }
         }
         else
@@ -421,6 +441,7 @@ public class PlayerControl : MonoBehaviour
         motor.state = Motor.State.idle;
         ani.SetBool("Move", false);
         skillCheck = true;
+        DefendCollOff();
         transform.LookAt(targetMonster.transform);
     }
     public void PlayerDefendLook()
@@ -434,9 +455,11 @@ public class PlayerControl : MonoBehaviour
     {
         hitCount = 15;
         skillCheck = false;
+        defendCheck = false;
         motor.moveSpeed = 7;
         ani.SetBool("Hit", false);
         ani.SetBool("Hit1", false);
+        DefendCollOn();
         AttackEnd();
     }
     /// <summary>
