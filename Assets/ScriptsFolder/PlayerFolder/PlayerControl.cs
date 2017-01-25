@@ -46,9 +46,12 @@ public class PlayerControl : MonoBehaviour
     PlayerDataLoader        playerAttackData;
     VirtualJoysticks        virtualjoystick;
     public Motor            motor;
+    
+    public Material targetMaterial;
+    public Shader shader;
 
     void Awake()
-    {
+    {      
         state = State.idle;
         //StartCoroutine(FSM());
         ani = GetComponent<Animator>();
@@ -61,12 +64,14 @@ public class PlayerControl : MonoBehaviour
         targetMonster = GameObject.Find("Monster");
         weaponeSlash = GameObject.Find("trail_bone");
         
-        for (int i = 0; i < 4; i++ )
-        {
-            // 궁 파츠오브젝트 활성화 여부
-            partObject[i].gameObject.SetActive(false);
-        }
-
+        //for (int i = 0; i < 4; i++ )
+        //{
+        //    // 궁 파츠오브젝트 활성화 여부
+        //    partObject[i].gameObject.SetActive(false);
+        //}
+        targetMaterial = new Material(shader);
+        targetMaterial.SetFloat("_node_3052", 0.5f);
+        
         target = targetMonster.transform;
         trans = gameObject.transform;
 
@@ -489,12 +494,7 @@ public class PlayerControl : MonoBehaviour
         // 이펙트
         playerEffect[7].gameObject.SetActive(true);
         playerEffect[8].gameObject.SetActive(true);
-
-        for (int i = 0; i < 4; i++)
-        {
-            // 궁 파츠오브젝트 활성화 여부
-           partObject[i].gameObject.SetActive(true);
-        }
+        
     }
     /// <summary>
     /// 플레이어 컷씬

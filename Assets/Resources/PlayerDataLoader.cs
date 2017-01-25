@@ -582,7 +582,13 @@ public class PlayerDataLoader : Action
         playerPower = playerPower * 2;
         ani_Player.speed = 1.25f;
         playerNowSkill = 0;
-        ultimateTime = 200;        
+        ultimateTime = 200;
+
+        for (int i = 0; i < 4; i++)
+        {
+            // 궁 파츠오브젝트 활성화 여부
+            playerControl.partObject[i].gameObject.SetActive(true);
+        }
     }
     /// <summary>
     /// 메터리얼에 관련
