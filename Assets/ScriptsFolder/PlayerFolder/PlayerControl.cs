@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     public BoxCollider defend_Coll;
 
     public GameObject[] playerEffect;
+    public GameObject[] partObject;
 
     public AudioClip[]  player_Sound;
     int                 player_Sound_Count;
@@ -59,6 +60,12 @@ public class PlayerControl : MonoBehaviour
         weaponeObMin = GameObject.Find("A");
         targetMonster = GameObject.Find("Monster");
         weaponeSlash = GameObject.Find("trail_bone");
+        
+        for (int i = 0; i < 4; i++ )
+        {
+            // 궁 파츠오브젝트 활성화 여부
+            partObject[i].gameObject.SetActive(false);
+        }
 
         target = targetMonster.transform;
         trans = gameObject.transform;
@@ -152,6 +159,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
+        ani.SetBool("Hit", false);
         // 버튼콜린더
         attack_Coll.enabled = true;
         defend_Coll.enabled = true;
@@ -347,14 +355,14 @@ public class PlayerControl : MonoBehaviour
     {
         state = State.attack;
         DefendCollOff();
+        attackCount_Effect = 1;
+        playerEffect[5].gameObject.SetActive(false);
         if (playerAttackData.ultimateTime > 0)
         {
-            attackCount_Effect = 1;
             if (ani.GetBool("Attack1") == true)
             {
                 playerEffect[0].gameObject.SetActive(true);
                 playerEffect[1].gameObject.SetActive(false);
-                playerEffect[5].gameObject.SetActive(false);
             }
         }
         else
@@ -364,14 +372,14 @@ public class PlayerControl : MonoBehaviour
     {
         state = State.attack;
         DefendCollOff();
+        attackCount_Effect = 2;
+        playerEffect[6].gameObject.SetActive(false);
         if (playerAttackData.ultimateTime > 0)
         {
-            attackCount_Effect = 2;
             if (ani.GetBool("Attack2") == true)
             {
                 playerEffect[1].gameObject.SetActive(true);
                 playerEffect[2].gameObject.SetActive(false);
-                playerEffect[6].gameObject.SetActive(false);
             }
         }
         else
@@ -381,13 +389,13 @@ public class PlayerControl : MonoBehaviour
     {
         state = State.attack;
         DefendCollOff();
+        attackCount_Effect = 3;
+        playerEffect[4].gameObject.SetActive(false);
         if (playerAttackData.ultimateTime > 0)
         {
-            attackCount_Effect = 3;
             if (ani.GetBool("Attack3") == true)
             {
                 playerEffect[2].gameObject.SetActive(true);
-                playerEffect[4].gameObject.SetActive(false);
                 playerEffect[0].gameObject.SetActive(false);
             }
         }
@@ -481,6 +489,12 @@ public class PlayerControl : MonoBehaviour
         // 이펙트
         playerEffect[7].gameObject.SetActive(true);
         playerEffect[8].gameObject.SetActive(true);
+
+        for (int i = 0; i < 4; i++)
+        {
+            // 궁 파츠오브젝트 활성화 여부
+           partObject[i].gameObject.SetActive(true);
+        }
     }
     /// <summary>
     /// 플레이어 컷씬

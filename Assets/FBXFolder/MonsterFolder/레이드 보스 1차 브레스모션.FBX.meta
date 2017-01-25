@@ -179,6 +179,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.022012576
+        functionName: AttackEffectStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.14682376
         functionName: ShakeCam
         data: 
@@ -209,13 +216,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.3303704
         functionName: AttackDamageTo
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.99526906
-        functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -258,6 +258,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.7288165
         functionName: AttackDamageTo
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.99526906
+        functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

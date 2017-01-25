@@ -6,6 +6,9 @@ public class MonsterControl : MonoBehaviour
 {
     public State        state;
 
+    //----------------이펙트 관련
+    public GameObject[] monsterEffect;
+
     Transform           trans;
     //----------------타겟 체크
     public GameObject   targetPlayer;
@@ -44,6 +47,8 @@ public class MonsterControl : MonoBehaviour
         targetPlayer = GameObject.Find("Player");
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
         ani_Player = GameObject.Find("Player").GetComponent<Animator>();
+
+        monsterEffect[0].gameObject.SetActive(false);
 
         closestDistSqr = Mathf.Infinity;
         trans = gameObject.transform;        
@@ -286,9 +291,15 @@ public class MonsterControl : MonoBehaviour
         ani.SetBool("BackAttack", false);
         ani.SetBool("Idle", true);
         
+        monsterEffect[0].gameObject.SetActive(false);
+
         attackbool = false;
         jumpbool = false;
         state = State.idle;
+    }
+    public void AttackEffectStart()
+    { 
+        monsterEffect[0].gameObject.SetActive(true);
     }
     /// <summary>
     /// 그로기 종료

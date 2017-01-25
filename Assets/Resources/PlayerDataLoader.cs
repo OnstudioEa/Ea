@@ -358,6 +358,8 @@ public class PlayerDataLoader : Action
 
             ani_Player.SetBool("Win", true);
             ani_Monster.SetBool("Lose", true);
+
+            monsterNowHP = 0;
         }
         if (buttonActionGayge <= 0)
         {
@@ -407,6 +409,11 @@ public class PlayerDataLoader : Action
                 playerControl.playerEffect[7].gameObject.SetActive(false);
                 playerControl.playerEffect[8].gameObject.SetActive(false);
 
+                for (int i = 0; i < 4; i++)
+                {
+                    // 궁 파츠오브젝트 활성화 여부
+                    playerControl.partObject[i].gameObject.SetActive(false);
+                }
             }
         }
 
@@ -575,7 +582,7 @@ public class PlayerDataLoader : Action
         playerPower = playerPower * 2;
         ani_Player.speed = 1.25f;
         playerNowSkill = 0;
-        ultimateTime = 200;
+        ultimateTime = 200;        
     }
     /// <summary>
     /// 메터리얼에 관련
@@ -603,8 +610,5 @@ public class PlayerDataLoader : Action
             }
         }
     }
-    /// <summary>
-    /// 플레이어 피격 모션
-    /// </summary>
 }
 
