@@ -96,6 +96,7 @@ public class PlayerDataLoader : Action
     public UILabel monsterHP_Label;
 
     public UIPanel    buttonActionPanel;
+    public UIPanel    SliderPanel;
     public UIPanel    buttonPanelActive_1;
     public GameObject buttonPanelActive_2;
 
@@ -185,7 +186,10 @@ public class PlayerDataLoader : Action
             playerNowSkill += 3;
         else
             if (playerNowSkill >= 100)
+        {
             ultimateColl.enabled = true;
+            taggedAction[2].gameObject.SetActive(true);
+        }
         if (ultimateTime > 0)
         {
             playerNowHP += 10;
@@ -393,6 +397,7 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
+            SliderPanel.gameObject.SetActive(true);
             buttonPanelActive_1.gameObject.SetActive(true);
             buttonPanelActive_2.gameObject.SetActive(true);
             cam_1.gameObject.SetActive(true);
@@ -444,6 +449,7 @@ public class PlayerDataLoader : Action
                 player_Mt[0].SetFloat("_node_3052", 0);
                 player_Mt[1].SetFloat("_node_3052", 0);
                 player_Mt[2].SetFloat("_node_3052", 0);
+                mt_float = 0;
             }
         }
 
@@ -604,6 +610,7 @@ public class PlayerDataLoader : Action
         ani_Player.SetBool("Ultimated", true);
 
         playerControl.playerEffect[9].gameObject.SetActive(true);
+        taggedAction[2].gameObject.SetActive(false);
         cam_3.gameObject.SetActive(true);
         cam_1.gameObject.SetActive(false);
 

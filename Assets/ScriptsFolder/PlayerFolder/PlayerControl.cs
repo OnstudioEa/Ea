@@ -45,6 +45,7 @@ public class PlayerControl : MonoBehaviour
     PlayerDataLoader        playerAttackData;
     VirtualJoysticks        virtualjoystick;
     public Motor            motor;
+    public Animator         Cam_ani;
     
     void Awake()
     {      
@@ -178,6 +179,8 @@ public class PlayerControl : MonoBehaviour
             playerEffect[9].gameObject.SetActive(false);
             playerEffect[10].gameObject.SetActive(false);
             playerAttackData.cam_1.gameObject.SetActive(true);
+
+            Time.timeScale = 1f;
         }
     }
     public void AttackFalse()
@@ -476,7 +479,8 @@ public class PlayerControl : MonoBehaviour
         // 이펙트
         playerEffect[7].gameObject.SetActive(true);
         playerEffect[8].gameObject.SetActive(true);
-        
+
+        Time.timeScale = 0.5f;
     }
     /// <summary>
     /// 플레이어 컷씬
@@ -497,6 +501,10 @@ public class PlayerControl : MonoBehaviour
         else
             if (player_Sound_Count == 1)
             AudioSource.PlayClipAtPoint(player_Sound[1], trans.position);
+    }
+    public void CamEvent()
+    {
+        Cam_ani.SetBool("Zoom", true);
     }
 }
 

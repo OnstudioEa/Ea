@@ -324,6 +324,7 @@ public class MonsterControl : MonoBehaviour
         playerdataLoader.buttonActionPanel.gameObject.SetActive(true);
         playerdataLoader.buttonPanelActive_1.gameObject.SetActive(false);
         playerdataLoader.buttonPanelActive_2.gameObject.SetActive(false);
+        playerdataLoader.SliderPanel.gameObject.SetActive(false);
         playerdataLoader.buttonActionGayge = 70;
         ani_Player.SetBool("Defend_1", true);
         ani.SetBool("Win", false);
@@ -336,6 +337,8 @@ public class MonsterControl : MonoBehaviour
     {
         playerdataLoader.buttonPanelActive_1.gameObject.SetActive(true);
         playerdataLoader.buttonPanelActive_2.gameObject.SetActive(true);
+        playerdataLoader.SliderPanel.gameObject.SetActive(true);
+
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
     }
