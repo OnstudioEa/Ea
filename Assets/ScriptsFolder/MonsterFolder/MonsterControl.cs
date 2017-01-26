@@ -339,4 +339,22 @@ public class MonsterControl : MonoBehaviour
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
     }
+    /// <summary>
+    /// 몬스터가 죽었을때 발생 이벤트
+    /// </summary>
+    public void MonsterDiedStart()
+    {
+        playerdataLoader.mt_Time = 5;
+    }
+    /// <summary>
+    /// 겨루기 검 이펙트
+    /// </summary>
+    public void ActionEffect()
+    {
+        monsterEffect[1].gameObject.SetActive(true);
+    }
+    public void ActionEffectOff()
+    {
+        monsterEffect[1].gameObject.SetActive(false);
+    }
 }

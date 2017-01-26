@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 893540af9a336b1438953a1798d2fadf
-timeCreated: 1484576948
+guid: c4c27e0cb99be884fb92e098cf0ad361
+timeCreated: 1485409217
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -178,8 +178,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.6708861
-        functionName: CutAction
+      - time: 0
+        functionName: ActionEffectOff
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -67,6 +67,11 @@ public class PlayerDataLoader : Action
     //-------------------------------------------------궁
     BoxCollider ultimateColl;
     public int  ultimateTime;
+    //-------------------------------------------------메터리얼
+    public Material[] player_Mt;
+    float mt_float;
+    public float mt_Time;
+    float mt_float_1;
     //-------------------------------------------------크리티컬
     int     critical_Check;
     float    critical_Damage;
@@ -118,6 +123,14 @@ public class PlayerDataLoader : Action
         monsterShaderChange_4 = GameObject.Find("Mesh_Armor").GetComponent<MonsterShaderChange>();
 
         ultimateColl = GameObject.Find("UltimateButton").GetComponent<BoxCollider>();
+        
+        player_Mt[0].SetFloat("_node_3052", 0);
+        player_Mt[1].SetFloat("_node_3052", 0);
+        player_Mt[2].SetFloat("_node_3052", 0);
+        player_Mt[3].SetFloat("_node_3052", 1);
+        player_Mt[4].SetFloat("_node_3052", 1);
+        player_Mt[5].SetFloat("_node_3052", 1);
+        mt_float_1 = 1;
 
         player_OB = player_OB.transform;
         monster_OB = monster_OB.transform;
@@ -247,12 +260,7 @@ public class PlayerDataLoader : Action
             SkillDelayTimeManager();
             MaterialManager();
             MonsterGroggyAttack();
-
-            if (monsterNowHP <= 0)
-            {
-                monsterNowHP = 0;
-                ani_Monster.SetBool("Died", true);
-            }
+            
             if (playerNowMP < 0)
                 playerControl.ani.SetBool("Defend", false);
             if (playerNowMP < 20)
@@ -305,6 +313,21 @@ public class PlayerDataLoader : Action
         playerHP_Label.text = playerNowHP.ToString("f0") + "/" + playerHp;
         playerMP_Label.text = playerNowMP.ToString("f0") + "/" + playerMaxMP;
         monsterHP_Label.text = monsterNowHP.ToString("f0") + "/" + monsterHp;
+        //몬스터 메터리얼 관련
+        if (mt_Time > 0)
+        {
+            mt_Time -= 0.1f;
+
+            mt_float_1 -= 0.02f;
+            player_Mt[3].SetFloat("_node_3052", mt_float_1);
+            player_Mt[4].SetFloat("_node_3052", mt_float_1);
+            player_Mt[5].SetFloat("_node_3052", mt_float_1);
+            if (mt_Time <= 0)
+            {
+                taggedAction[0].gameObject.SetActive(false);
+                Debug.Log("끝났습니다~");
+            }
+        }
     }
     /// <summary>
     /// 그로기 기습공격 관련
@@ -354,11 +377,9 @@ public class PlayerDataLoader : Action
             cam_1.gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
 
-            playerControl.playerEffect[13].gameObject.SetActive(false);
-
             ani_Player.SetBool("Win", true);
             ani_Monster.SetBool("Lose", true);
-
+                        
             monsterNowHP = 0;
         }
         if (buttonActionGayge <= 0)
@@ -377,7 +398,7 @@ public class PlayerDataLoader : Action
             cam_1.gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
 
-            playerControl.playerEffect[13].gameObject.SetActive(false);
+            monsterControl.monsterEffect[1].gameObject.SetActive(false);
 
             ani_Monster.SetBool("Win", true);
             ani_Player.SetBool("Lose", true);
@@ -392,14 +413,25 @@ public class PlayerDataLoader : Action
     public void SkillDelayTimeManager()
     {
         if (ultimateTime > 0)
-        {
+        {//[궁온]
             ultimateTime -= 1;
-            if (playerNowHP > playerHp * 0.1f)
+
+            if (mt_float < 1)
             {
+                // 쉐이더 수치가 1보다 작을때 실행 [궁온]
+                mt_float += 0.05f;
+                player_Mt[0].SetFloat("_node_3052", mt_float);
+                player_Mt[1].SetFloat("_node_3052", mt_float);
+                player_Mt[2].SetFloat("_node_3052", mt_float);
+            }
+
+            if (playerNowHP > playerHp * 0.1f)
+            { //[궁온] 피가 1씩 닳음;
                 playerNowHP -= 1f;
             }
             if (ultimateTime <= 0)
             {
+                 //[궁오프] 원래대로 돌아오게 됨
                 playerPower = playerPower * 0.5f;
                 ani_Player.speed = 1f;
 
@@ -408,12 +440,10 @@ public class PlayerDataLoader : Action
                 monsterShaderChange_4.rend.sharedMaterial = monsterShaderChange_4.material[0];
                 playerControl.playerEffect[7].gameObject.SetActive(false);
                 playerControl.playerEffect[8].gameObject.SetActive(false);
-
-                for (int i = 0; i < 4; i++)
-                {
-                    // 궁 파츠오브젝트 활성화 여부
-                    playerControl.partObject[i].gameObject.SetActive(false);
-                }
+                
+                player_Mt[0].SetFloat("_node_3052", 0);
+                player_Mt[1].SetFloat("_node_3052", 0);
+                player_Mt[2].SetFloat("_node_3052", 0);
             }
         }
 
@@ -582,13 +612,7 @@ public class PlayerDataLoader : Action
         playerPower = playerPower * 2;
         ani_Player.speed = 1.25f;
         playerNowSkill = 0;
-        ultimateTime = 200;
-
-        for (int i = 0; i < 4; i++)
-        {
-            // 궁 파츠오브젝트 활성화 여부
-            playerControl.partObject[i].gameObject.SetActive(true);
-        }
+        ultimateTime = 200;                
     }
     /// <summary>
     /// 메터리얼에 관련

@@ -32,7 +32,6 @@ public class PlayerControl : MonoBehaviour
     public BoxCollider defend_Coll;
 
     public GameObject[] playerEffect;
-    public GameObject[] partObject;
 
     public AudioClip[]  player_Sound;
     int                 player_Sound_Count;
@@ -47,9 +46,6 @@ public class PlayerControl : MonoBehaviour
     VirtualJoysticks        virtualjoystick;
     public Motor            motor;
     
-    public Material targetMaterial;
-    public Shader shader;
-
     void Awake()
     {      
         state = State.idle;
@@ -63,14 +59,6 @@ public class PlayerControl : MonoBehaviour
         weaponeObMin = GameObject.Find("A");
         targetMonster = GameObject.Find("Monster");
         weaponeSlash = GameObject.Find("trail_bone");
-        
-        //for (int i = 0; i < 4; i++ )
-        //{
-        //    // 궁 파츠오브젝트 활성화 여부
-        //    partObject[i].gameObject.SetActive(false);
-        //}
-        targetMaterial = new Material(shader);
-        targetMaterial.SetFloat("_node_3052", 0.5f);
         
         target = targetMonster.transform;
         trans = gameObject.transform;
@@ -438,17 +426,11 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
         skillCheck = true;
-        Handheld.Vibrate();
+        Handheld.Vibrate(); //진동
 
         transform.LookAt(targetMonster.transform);
     }
-    /// <summary>
-    /// 겨루기 검 이펙트
-    /// </summary>
-    public void ActionEffect()
-    {
-        playerEffect[13].gameObject.SetActive(true);
-    }
+    
     /// <summary>
     /// 피격모션 시작 이벤트
     /// </summary>
