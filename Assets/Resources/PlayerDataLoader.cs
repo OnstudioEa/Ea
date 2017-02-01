@@ -245,7 +245,8 @@ public class PlayerDataLoader : Action
         }
         if (playerControl.defendCheck == true) // 막았을때에는 이펙트 발생
         {
-            playerControl.playerEffect[3].gameObject.SetActive(true);
+            //   playerControl.playerEffect[3].gameObject.SetActive(true);
+            playerControl.Defend_Effect_On();
             playerControl.PlayerDefendLook();
         }
     }

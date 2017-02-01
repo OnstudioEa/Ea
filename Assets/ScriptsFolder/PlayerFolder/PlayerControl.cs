@@ -32,9 +32,11 @@ public class PlayerControl : MonoBehaviour
     public BoxCollider defend_Coll;
 
     public GameObject[] playerEffect;
-
+    public GameObject[] player_Defend_Effect;
     public AudioClip[]  player_Sound;
     int                 player_Sound_Count;
+    int                 player_Effect_Count;
+
     AudioClip test;
 
     public int          attackCount_Effect;
@@ -265,7 +267,8 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
-        playerEffect[3].gameObject.SetActive(false);
+        //   playerEffect[3].gameObject.SetActive(false);
+        Defend_Effect_Off();
 
         motor.moveSpeed = 7; // 수치
     }
@@ -277,6 +280,37 @@ public class PlayerControl : MonoBehaviour
     {
         if (motor.state == Motor.State.move)
             defend_Coll.enabled = false;
+    }
+    /// <summary>
+    /// 막기이펙트
+    /// </summary>
+    public void Defend_Effect_On()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (i >= 9)
+            {
+                Defend_Effect_Off();
+            }
+            else
+            {
+                if (player_Defend_Effect[i].gameObject.activeInHierarchy == false)
+                {
+                    player_Defend_Effect[i].gameObject.SetActive(true);
+                    return;
+                }
+            }
+        }
+    }
+    public void Defend_Effect_Off()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (player_Defend_Effect[i] != null)
+            {
+                player_Defend_Effect[i].gameObject.SetActive(false);
+            }
+        }
     }
     /// <summary>
     /// 스킬 버튼
