@@ -49,11 +49,8 @@ public class InventoryController : MonoBehaviour
     private void InitItems()
     {
         // 다 말고.. 조금만 넣을께요^^;;
-        m_lItemNames.Add("Button");
-        m_lItemNames.Add("Button A");
-        m_lItemNames.Add("Button B");
-        m_lItemNames.Add("Button X");
-        m_lItemNames.Add("Button Y");
+        m_lItemNames.Add("Berry_02");
+        m_lItemNames.Add("Coin_03");
         //m_lItemNames.Add("Crystal Ball_03");
         //m_lItemNames.Add("Essence_03");
         //m_lItemNames.Add("Flower Bunch_03");

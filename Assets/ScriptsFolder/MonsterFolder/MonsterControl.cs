@@ -198,14 +198,14 @@ public class MonsterControl : MonoBehaviour
                 if (attackNumber == 1)
                 {
                     attackDist = 1;
-                    attackDist_1 = 50;
+                    attackDist_1 = 150;
                     ani.SetBool("Attack1", true);
                     return;
                 }
                 if (attackNumber == 2)
                 {
                     attackDist = 40;
-                    attackDist_1 = 30;
+                    attackDist_1 = 40;
                     ani.SetBool("Attack3", true);
                     return;
                 }

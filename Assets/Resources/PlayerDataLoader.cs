@@ -553,7 +553,7 @@ public class PlayerDataLoader : Action
             critical_Check_Monster = Random.Range(1, 11);
             if (critical_Check_Monster <= 1)
             {
-                critical_Damage_Monster = Random.Range(1.5f, 2.5f);
+                critical_Damage_Monster = Random.Range(1.2f, 1.5f);
                 playerNowHP -= (monsterPower * critical_Damage_Monster);
                 return;
             }
