@@ -318,7 +318,7 @@ public class PlayerDataLoader : Action
         playerHP_Label.text = playerNowHP.ToString("f0") + "/" + playerHp;
         playerMP_Label.text = playerNowMP.ToString("f0") + "/" + playerMaxMP;
         monsterHP_Label.text = monsterNowHP.ToString("f0") + "/" + monsterHp;
-        //몬스터 메터리얼 관련
+        //몬스터 메터리얼 관련 죽은 후 셰이더
         if (mt_Time > 0)
         {
             mt_Time -= 0.1f;
@@ -327,6 +327,22 @@ public class PlayerDataLoader : Action
             player_Mt[3].SetFloat("_node_3052", mt_float_1);
             player_Mt[4].SetFloat("_node_3052", mt_float_1);
             player_Mt[5].SetFloat("_node_3052", mt_float_1);
+
+            playerControl.camObject[2].gameObject.SetActive(false);
+            playerControl.camObject[0].gameObject.SetActive(true);
+            Time.timeScale = 0.3f;
+            if (mt_Time <= 4.5f)
+            {
+                playerControl.camObject[0].gameObject.SetActive(false);
+                playerControl.camObject[1].gameObject.SetActive(true);
+            }
+            if (mt_Time <= 4f)
+            {
+                cam_1.gameObject.SetActive(true);
+                playerControl.camObject[1].gameObject.SetActive(false);
+                Time.timeScale = 1f;
+            }
+
             if (mt_Time <= 0)
             {
                 taggedAction[0].gameObject.SetActive(false);
@@ -379,7 +395,8 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
-            cam_1.gameObject.SetActive(true);
+            //cam_1.gameObject.SetActive(true);
+            playerControl.camObject[2].gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
 
             ani_Player.SetBool("Win", true);

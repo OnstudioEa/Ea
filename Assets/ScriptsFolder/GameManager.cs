@@ -6,7 +6,7 @@ using System.IO;
 
 public enum State
 {
-    idle, move, attack, died
+    idle, move, attack, died, win
 }
 public class GameManager : MonoBehaviour
 {

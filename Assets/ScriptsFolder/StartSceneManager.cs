@@ -6,7 +6,6 @@ public class StartSceneManager : MonoBehaviour {
     public UIPanel panel;
     public UIButton gameStartButtonColl;
     public UISprite touch;
-    public GameObject movie;
 
     public float timeCount;
 
@@ -14,7 +13,6 @@ public class StartSceneManager : MonoBehaviour {
 	void Awake() {
 
         panel.gameObject.SetActive(true);
-        movie.gameObject.SetActive(false);
         touch.gameObject.SetActive(false);
         gameStartButtonColl.gameObject.SetActive(false);
 
@@ -28,7 +26,6 @@ public class StartSceneManager : MonoBehaviour {
             timeCount -= Time.deltaTime;
             if (timeCount <= 0)
             {
-                movie.gameObject.SetActive(true);
                 gameStartButtonColl.gameObject.SetActive(true);
                 touch.gameObject.SetActive(true);
                 panel.gameObject.SetActive(false);

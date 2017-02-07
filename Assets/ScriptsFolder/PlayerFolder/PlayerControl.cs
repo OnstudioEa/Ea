@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     GameObject targetMonster;
     GameObject weaponeSlash;
 
+    public GameObject[] camObject;
+
     Transform target;
     Transform trans;
            
