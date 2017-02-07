@@ -17,7 +17,6 @@ public class Inven
 {
     public List<Inven_Item> _lstItme;
 
-
     public Inven()
     {
         _lstItme = new List<Inven_Item>();
@@ -34,21 +33,27 @@ public enum Inven_Item_Type
 {
     [StringValue("None")] None = 0,
 
-    [StringValue("M_A")]  Material_A  = 1000,
-    [StringValue("M_B")]  Material_B  = 1001,
-    [StringValue("M_C")]  Material_C  = 1002,
+    [StringValue("P_A")]  Powder_A  = 1000,
+    [StringValue("P_B")]  Powder_B  = 1001,
+    [StringValue("P_C")]  Powder_C  = 1002,
                           
-    [StringValue("W_A")]  Weapon_A    = 2000,
-    [StringValue("W_B")]  Weapon_B    = 2001,
-    [StringValue("W_C")]  Weapon_C    = 2002,
+    [StringValue("M_A")]  Metal_A    = 2000,
+    [StringValue("M_B")]  Metal_B    = 2001,
+    [StringValue("M_C")]  Metal_C    = 2002,
                           
-    [StringValue("A_A")]  Armor_A     = 3000,
-    [StringValue("A_B")]  Armor_B     = 3001,
-    [StringValue("A_C")]  Armor_C     = 3002,
+    [StringValue("P_A")]  Part_A     = 3000,
+    [StringValue("P_B")]  Part_B     = 3001,
+    [StringValue("P_C")]  Part_C     = 3002,
 }
 
 public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
 {
+    public int item_int;
+
+    public int int_Name;
+
+    public InventoryController inventoryCon;
+
     Inven _inven;
     public Inven Inven { get { return _inven; } }
     
@@ -75,6 +80,7 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
         {
             if (_inven._lstItme[i].unigueNo == (int)type)
             {
+                // 아이템을 얻으면 같은 이름값의 카운터를 더함
                 _inven._lstItme[i].count += count;
                 return;
             }
@@ -97,6 +103,7 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
         {
             if (_inven._lstItme[i].unigueNo == type)
             {
+                // 처음 시작할때 같은 이름값을 찾음
                 _inven._lstItme[i].count += count;
                 return;
             }
@@ -117,13 +124,31 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
         {
             strInven.itemList += _inven._lstItme[i].unigueNo.ToString() + ":";
             strInven.itemList += _inven._lstItme[i].count.ToString();
-            if (i != _inven._lstItme.Count-1)
+            
+            if (i != _inven._lstItme.Count - 1)
             {
                 strInven.itemList += ",";
             }
+            // 이름으로 새로 생성하는것은 그저 테스트 후에 지워야함
+            if (_inven._lstItme[i].unigueNo == 3000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+            }
+            if (_inven._lstItme[i].unigueNo == 2000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+            }
+            if (_inven._lstItme[i].unigueNo == 1000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+            }
         }
+       
         string strJSON = JsonUtility.ToJson(strInven); //제이슨형식으로 만듬
-
+                
         PlayerPrefs.SetString("Inven", strJSON);
         Debug.Log(strJSON);
         return true;
@@ -146,8 +171,27 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
             string[] arr2 = arr1[i].Split(':');
             
             Add(int.Parse(arr2[0]), int.Parse(arr2[1]));
-            Debug.Log("uniqueNo : " + _inven._lstItme[i].unigueNo);
-            Debug.Log("count : " + _inven._lstItme[i].count);
+          //  Debug.Log("uniqueNo : " + _inven._lstItme[i].unigueNo);
+          //  Debug.Log("count : " + _inven._lstItme[i].count);
+
+            if (_inven._lstItme[i].unigueNo == 3000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.TestItemCode();
+            }
+            if (_inven._lstItme[i].unigueNo == 2000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.TestItemCode();
+            }
+            if (_inven._lstItme[i].unigueNo == 1000)
+            {
+                item_int = _inven._lstItme[i].count;
+                int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.TestItemCode();
+            }
         }
         return true;
     }
