@@ -5,15 +5,16 @@ public class StartSceneManager : MonoBehaviour {
 
     public UIPanel panel;
     public UIButton gameStartButtonColl;
-    public UISprite touch;
+
+    public UIPanel title_Panel;
 
     public float timeCount;
 
 	// Use this for initialization
 	void Awake() {
 
-        panel.gameObject.SetActive(true);
-        touch.gameObject.SetActive(false);
+        title_Panel.gameObject.SetActive(false);
+        panel.gameObject.SetActive(true); // 온스튜디오 이미지
         gameStartButtonColl.gameObject.SetActive(false);
 
     }
@@ -27,10 +28,10 @@ public class StartSceneManager : MonoBehaviour {
             if (timeCount <= 0)
             {
                 gameStartButtonColl.gameObject.SetActive(true);
-                touch.gameObject.SetActive(true);
                 panel.gameObject.SetActive(false);
+                title_Panel.gameObject.SetActive(true);
             }
         }
-	
-	}
+
+    }
 }

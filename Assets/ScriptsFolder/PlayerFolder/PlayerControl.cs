@@ -223,7 +223,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void DefendButtonOn()
     {
-        if (ani.GetBool("Defend") == false && playerAttackData.playerNowMP > 5)
+        if (ani.GetBool("Defend") == false && playerAttackData.playerNowMP > 5 && ani.GetBool("Hit") == false && ani.GetBool("Hit1") == false)
         {
             ani.SetBool("Defend", true);
             ani.SetBool("AttackMove", true);

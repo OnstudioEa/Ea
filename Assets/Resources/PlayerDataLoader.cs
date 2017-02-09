@@ -215,7 +215,7 @@ public class PlayerDataLoader : Action
             if (playerNowSkill >= 100)
             ultimateColl.enabled = true;
 
-        if (playerControl.defendCheck == false && ultimateTime <= 0) // 막기상태가 아닐때 데미지를 받는다. [평시]
+        if (playerControl.defendCheck == false && ultimateTime <= 0 && playerControl.ani.GetBool("Defend") == false) // 막기상태가 아닐때 데미지를 받는다. [평시]
         {
             if (playerControl.hitCount <= 0)
             {
@@ -238,7 +238,7 @@ public class PlayerDataLoader : Action
         }
         else
         {
-            if (playerControl.defendCheck == false && playerNowHP > playerHp * 0.1f) //[궁시전] 체력 10%이하로 달지않음
+            if (playerControl.defendCheck == false && playerNowHP > playerHp * 0.1f && playerControl.ani.GetBool("Defend") == false) //[궁시전] 체력 10%이하로 달지않음
             {
                 AttackDamage_Monster();
             }
