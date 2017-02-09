@@ -324,20 +324,20 @@ public class MonsterControl : MonoBehaviour
         playerdataLoader.buttonActionPanel.gameObject.SetActive(true);
         playerdataLoader.buttonPanelActive_1.gameObject.SetActive(false);
         playerdataLoader.buttonPanelActive_2.gameObject.SetActive(false);
-        playerdataLoader.SliderPanel.gameObject.SetActive(false);
+        playerdataLoader.sliderPanel.gameObject.SetActive(false);
         playerdataLoader.buttonActionGayge = 70;
         ani_Player.SetBool("Defend_1", true);
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
     }
     /// <summary>
-    /// 몬스터 컷씬
+    /// 몬스터 죽는모션 이벤트_1
     /// </summary>
     public void CutAction()
     {
-        playerdataLoader.buttonPanelActive_1.gameObject.SetActive(true);
-        playerdataLoader.buttonPanelActive_2.gameObject.SetActive(true);
-        playerdataLoader.SliderPanel.gameObject.SetActive(true);
+        //playerdataLoader.buttonPanelActive_1.gameObject.SetActive(true); // Attack Button Panel
+        //playerdataLoader.buttonPanelActive_2.gameObject.SetActive(true); // Joystick Image
+        //playerdataLoader.sliderPanel.gameObject.SetActive(true);
 
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
@@ -347,7 +347,7 @@ public class MonsterControl : MonoBehaviour
     /// </summary>
     public void MonsterDiedStart()
     {
-        playerdataLoader.mt_Time = 5;
+        playerdataLoader.mt_Time = 7;
     }
     /// <summary>
     /// 겨루기 검 이펙트

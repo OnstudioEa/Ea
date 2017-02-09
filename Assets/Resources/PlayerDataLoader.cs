@@ -95,8 +95,9 @@ public class PlayerDataLoader : Action
     public UILabel playerMP_Label;
     public UILabel monsterHP_Label;
 
+    public UIPanel[] uiPanel;
     public UIPanel    buttonActionPanel;
-    public UIPanel    SliderPanel;
+    public UIPanel    sliderPanel;
     public UIPanel    buttonPanelActive_1;
     public GameObject buttonPanelActive_2;
 
@@ -279,16 +280,6 @@ public class PlayerDataLoader : Action
         }
         yield return new WaitForSeconds(0.1f);
     }
-    /*IEnumerator attack()
-    {
-        if (state == State.attack)
-        {
-            HPBar();
-           // monsterNowHP -= playerPower;
-            state = State.idle;
-        }
-        yield return new WaitForSeconds(0.1f);
-    }*/
     /// <summary>
     /// HP에 관련된 함수
     /// </summary>
@@ -331,21 +322,32 @@ public class PlayerDataLoader : Action
             playerControl.camObject[2].gameObject.SetActive(false);
             playerControl.camObject[0].gameObject.SetActive(true);
             Time.timeScale = 0.3f;
-            if (mt_Time <= 4.5f)
+            if (mt_Time <= 6.5f) //카메라_1
             {
                 playerControl.camObject[0].gameObject.SetActive(false);
                 playerControl.camObject[1].gameObject.SetActive(true);
             }
-            if (mt_Time <= 4f)
+            if (mt_Time <= 6f) //카메라_2
             {
                 cam_1.gameObject.SetActive(true);
                 playerControl.camObject[1].gameObject.SetActive(false);
                 Time.timeScale = 1f;
             }
-
+            if (mt_Time <= 5f) //카메라_2
+            {
+                taggedAction[3].gameObject.SetActive(true);
+                uiPanel[1].gameObject.SetActive(true);
+            }
             if (mt_Time <= 0)
             {
                 taggedAction[0].gameObject.SetActive(false);
+                taggedAction[3].gameObject.SetActive(false);
+                uiPanel[0].gameObject.SetActive(true);
+
+                player_Mt[3].SetFloat("_node_3052", 1);
+                player_Mt[4].SetFloat("_node_3052", 1);
+                player_Mt[5].SetFloat("_node_3052", 1);
+
                 Debug.Log("끝났습니다~");
             }
         }
@@ -415,7 +417,7 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
-            SliderPanel.gameObject.SetActive(true);
+            sliderPanel.gameObject.SetActive(true);
             buttonPanelActive_1.gameObject.SetActive(true);
             buttonPanelActive_2.gameObject.SetActive(true);
             cam_1.gameObject.SetActive(true);

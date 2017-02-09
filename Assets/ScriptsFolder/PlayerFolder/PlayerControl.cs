@@ -49,7 +49,6 @@ public class PlayerControl : MonoBehaviour
     PlayerDataLoader        playerAttackData;
     VirtualJoysticks        virtualjoystick;
     public Motor            motor;
-    public Animator         Cam_ani;
     
     void Awake()
     {      
@@ -158,6 +157,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
         ani.SetBool("Hit", false);
+        ani.SetBool("Hit1", false);
         // 버튼콜린더
         attack_Coll.enabled = true;
         defend_Coll.enabled = true;
@@ -168,16 +168,18 @@ public class PlayerControl : MonoBehaviour
         playerEffect[4].gameObject.SetActive(false);
         if (ani.GetBool("Skill1") == true || ani.GetBool("Skill2") == true)
         {
+            ani.SetBool("Hit", false);
+            ani.SetBool("Hit1", false);
             playerEffect[11].gameObject.SetActive(false);
             playerEffect[12].gameObject.SetActive(false);
             ani.SetBool("Skill1", false);
             ani.SetBool("Skill2", false);
-            ani.SetBool("Hit", false);
             return;
         }
         if (ani.GetBool("Ultimated") == true)
         {
             ani.SetBool("Hit", false);
+            ani.SetBool("Hit1", false);
             ani.SetBool("Ultimated", false);
             playerAttackData.cam_3.gameObject.SetActive(false);
             playerEffect[9].gameObject.SetActive(false);
@@ -321,6 +323,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (ani.GetBool("Skill2") == false)
         {
+            ani.SetBool("Hit", false);
+            ani.SetBool("Hit1", false);
             ani.SetBool("Skill1", true);
             skillCheck = true;
             attack_Coll.enabled = false;
@@ -333,6 +337,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (ani.GetBool("Skill1") == false)
         {
+            ani.SetBool("Hit", false);
+            ani.SetBool("Hit1", false);
             ani.SetBool("Skill2", true);
             attack_Coll.enabled = false;
             skill_2_Coll.enabled = false;
@@ -537,10 +543,6 @@ public class PlayerControl : MonoBehaviour
         else
             if (player_Sound_Count == 1)
             AudioSource.PlayClipAtPoint(player_Sound[1], trans.position);
-    }
-    public void CamEvent()
-    {
-        Cam_ani.SetBool("Zoom", true);
     }
 }
 
