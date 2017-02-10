@@ -185,7 +185,7 @@ public class PlayerControl : MonoBehaviour
             playerEffect[9].gameObject.SetActive(false);
             playerEffect[10].gameObject.SetActive(false);
             playerAttackData.cam_1.gameObject.SetActive(true);
-
+            
             Time.timeScale = 1f;
         }
     }

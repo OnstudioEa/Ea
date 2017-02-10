@@ -628,6 +628,7 @@ public class PlayerDataLoader : Action
     public void UltimateButton()
     {
         ani_Player.SetBool("Ultimated", true);
+        ani_Player.SetBool("AttackMove", false);
 
         playerControl.playerEffect[9].gameObject.SetActive(true);
         taggedAction[2].gameObject.SetActive(false);
