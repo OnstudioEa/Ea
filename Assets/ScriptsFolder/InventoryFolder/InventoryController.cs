@@ -28,11 +28,9 @@ public class InventoryController : MonoBehaviour
     void Start()
     {
          //TestCode_SaveManager.Instance.Initialize();
-
-        item_Sprite = m_grid.GetComponentsInChildren<UISprite>();
-        
+        item_Sprite = m_grid.GetComponentsInChildren<UISprite>();        
     }    
-    void OnGUI()
+    /*void OnGUI()
     {
         if (GUI.Button(new Rect(10, 10, 100, 30), "AddItem_P_A"))
         {
@@ -50,8 +48,8 @@ public class InventoryController : MonoBehaviour
         {
             SaveInven();            
         }
-    }
-    public void GetItem(Inven_Item_Type type, int count = -1)
+    }*/
+    public void GetItem(Inven_Item_Type type, int count = 1)
     {
         TestCode_SaveManager.Instance.Add(type, count);
     }
@@ -62,16 +60,19 @@ public class InventoryController : MonoBehaviour
     {
         item_Part_Name = testCode_SaveManager.int_Name.ToString();
         item_Part_Count = testCode_SaveManager.item_int;
-        
-        for (int i = 0; i < item_Sprite.Length; i++)
+
+        if (item_Sprite != null)
         {
-            if (item_Part_Name == item_Sprite[i].spriteName)
+            for (int i = 0; i < item_Sprite.Length; i++)
             {
-                ItemScript itemUpdate = item_Sprite[i].gameObject.GetComponent<ItemScript>();
-                itemUpdate.SetInfo_1(item_Part_Count);             
-                break;
+                if (item_Part_Name == item_Sprite[i].spriteName)
+                {
+                    ItemScript itemUpdate = item_Sprite[i].gameObject.GetComponent<ItemScript>();
+                    itemUpdate.SetInfo_1(item_Part_Count);
+                    break;
+                }
             }
-        }        
+        }  
     }
     /// <summary>
     /// 아이템창 키면서 생성한다 [처음 시작할때 생성한다]
@@ -81,9 +82,7 @@ public class InventoryController : MonoBehaviour
 
         item_Part_Name = testCode_SaveManager.int_Name.ToString();
         item_Part_Count = testCode_SaveManager.item_int;
-
-        Debug.Log(item_Part_Name.ToString());
-
+        
         if (item_Part_Count > 0)
         {
             GameObject gObjItem = NGUITools.AddChild(m_grid.gameObject, m_gObjSampleItem);
@@ -102,14 +101,19 @@ public class InventoryController : MonoBehaviour
     /// <summary>
     /// 아이템 업뎃 전 삭제
     /// </summary>
-    public void UpdataItemDetaDestroy()
+    public void UpdateItemDetaDestroy()
     {
-        for (int i = 0; i < item_Sprite.Length; i++)
+        if (item_Sprite != null)
         {
-            ItemScript itemUpdate = item_Sprite[i].gameObject.GetComponent<ItemScript>();
-            itemUpdate.DestroyItem();
+            for (int i = 0; i < item_Sprite.Length; i++)
+            {
+
+                ItemScript itemUpdate = item_Sprite[i].gameObject.GetComponent<ItemScript>();
+                itemUpdate.DestroyItem();
+            }
         }
-        item_Sprite = null;
+        if (item_Sprite != null)
+            item_Sprite = null;
 
         m_grid.Reposition();
         m_scrollView.ResetPosition();
