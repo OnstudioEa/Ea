@@ -49,8 +49,8 @@ public class PlayerDataLoader : Action
     private float    playerValueSkill;
     //-------------------------------------------------Animation
     int                 animationDelay_Monster;
-    MonsterShaderChange monsterShaderChange;
-    MonsterShaderChange monsterShaderChange_1;
+    public MonsterShaderChange monsterShaderChange;
+    public MonsterShaderChange monsterShaderChange_1;
     int                 animationDelay_Player;
     public MonsterShaderChange monsterShaderChange_2;
     public MonsterShaderChange monsterShaderChange_3;
@@ -118,11 +118,6 @@ public class PlayerDataLoader : Action
         ani_Player = GameObject.Find("Player").GetComponent<Animator>();
         ani_Monster = GameObject.Find("Monster").GetComponent<Animator>();
         shakeCam = GameObject.Find("CamManager").GetComponent<ShakeCamera>();
-        monsterShaderChange = GameObject.Find("몸체").GetComponent<MonsterShaderChange>();
-        monsterShaderChange_1 = GameObject.Find("무기").GetComponent<MonsterShaderChange>();
-        monsterShaderChange_2 = GameObject.Find("Mesh_Sword").GetComponent<MonsterShaderChange>();
-        monsterShaderChange_3 = GameObject.Find("Mesh_Face").GetComponent<MonsterShaderChange>();
-        monsterShaderChange_4 = GameObject.Find("Mesh_Armor").GetComponent<MonsterShaderChange>();
 
         ultimateColl = GameObject.Find("UltimateButton").GetComponent<BoxCollider>();
         

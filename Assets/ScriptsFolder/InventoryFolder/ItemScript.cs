@@ -21,11 +21,11 @@ public class ItemScript : MonoBehaviour
     public UISprite m_sprIcon;
     public UILabel m_label;
 
-   // public InventoryController inventoryCtrl;
+    // public InventoryController inventoryCtrl;
     void Awake()
     {
         state = State.idle;
-       // StartCoroutine(FSM());
+        // StartCoroutine(FSM());
 
         // tT = GameObject.Find("Inventory Manager").GetComponent<TestCode_SaveManager>().Test_int;
     }
@@ -50,8 +50,13 @@ public class ItemScript : MonoBehaviour
         // 같은 아틀라스에 있으니 스프라이트 이름 찾아 넣어주면 이미지가 바껴요.
         m_sprIcon.spriteName = spriteName;
     }
-    public void SetLabel(int spriteValue)
+
+    public void SetInfo_1(int spriteValue)
     {
         m_label.text = spriteValue.ToString();
+    }
+    public void DestroyItem()
+    {
+        Destroy(this.gameObject);
     }
 }

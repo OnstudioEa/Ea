@@ -152,7 +152,8 @@ public class PlayerControl : MonoBehaviour
         skillCheck = false;
         attackCheck = true;
         defendCheck = false;
-        ani.SetBool("AttackMove", true);
+        if (ani.GetBool("Ultimated") == false)
+            ani.SetBool("AttackMove", true);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
@@ -168,8 +169,6 @@ public class PlayerControl : MonoBehaviour
         playerEffect[4].gameObject.SetActive(false);
         if (ani.GetBool("Skill1") == true || ani.GetBool("Skill2") == true)
         {
-            ani.SetBool("Hit", false);
-            ani.SetBool("Hit1", false);
             playerEffect[11].gameObject.SetActive(false);
             playerEffect[12].gameObject.SetActive(false);
             ani.SetBool("Skill1", false);
@@ -178,8 +177,6 @@ public class PlayerControl : MonoBehaviour
         }
         if (ani.GetBool("Ultimated") == true)
         {
-            ani.SetBool("Hit", false);
-            ani.SetBool("Hit1", false);
             ani.SetBool("Ultimated", false);
             playerAttackData.cam_3.gameObject.SetActive(false);
             playerEffect[9].gameObject.SetActive(false);
@@ -204,6 +201,8 @@ public class PlayerControl : MonoBehaviour
         state = State.idle;
         skillCheck = false;
         weaponeSlash.gameObject.SetActive(false);
+        if (ani.GetBool("Ultimated") == false)
+            ani.SetBool("AttackMove", true);
     }
     public void AttackTrue()
     {
@@ -229,6 +228,7 @@ public class PlayerControl : MonoBehaviour
         {
             ani.SetBool("Defend", true);
             ani.SetBool("AttackMove", true);
+            Debug.Log("막기");
         }
     }
     /// <summary>
@@ -241,6 +241,7 @@ public class PlayerControl : MonoBehaviour
         {
             ani.SetBool("AttackMove", true);
             defendCheck = false;
+            Debug.Log("막기_1");
         }
     }
     /// <summary>
@@ -326,6 +327,8 @@ public class PlayerControl : MonoBehaviour
             ani.SetBool("Hit", false);
             ani.SetBool("Hit1", false);
             ani.SetBool("Skill1", true);
+            ani.SetBool("AttackMove", false);
+
             skillCheck = true;
             attack_Coll.enabled = false;
             skill_1_Coll.enabled = false;

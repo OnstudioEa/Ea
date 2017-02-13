@@ -130,20 +130,23 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
                 strInven.itemList += ",";
             }
             // 이름으로 새로 생성하는것은 그저 테스트 후에 지워야함
-            if (_inven._lstItme[i].unigueNo == 3000)
+            if (_inven._lstItme[i].unigueNo == 1000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.UpdataItemDeta();
             }
             if (_inven._lstItme[i].unigueNo == 2000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.UpdataItemDeta();
             }
-            if (_inven._lstItme[i].unigueNo == 1000)
+            if (_inven._lstItme[i].unigueNo == 3000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
+                inventoryCon.UpdataItemDeta();
             }
         }
        
@@ -174,23 +177,23 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
           //  Debug.Log("uniqueNo : " + _inven._lstItme[i].unigueNo);
           //  Debug.Log("count : " + _inven._lstItme[i].count);
 
-            if (_inven._lstItme[i].unigueNo == 3000)
+            if (_inven._lstItme[i].unigueNo == 1000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
-                inventoryCon.TestItemCode();
+                inventoryCon.StartItemLoader();
             }
             if (_inven._lstItme[i].unigueNo == 2000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
-                inventoryCon.TestItemCode();
+                inventoryCon.StartItemLoader();
             }
-            if (_inven._lstItme[i].unigueNo == 1000)
+            if (_inven._lstItme[i].unigueNo == 3000)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
-                inventoryCon.TestItemCode();
+                inventoryCon.StartItemLoader();
             }
         }
         return true;
