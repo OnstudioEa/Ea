@@ -62,7 +62,7 @@ public class PlayerDataLoader : Action
 
     public Transform player_OB;
     public Transform monster_OB;
-    float             gorggyAttack_float;
+    float             groggyAttack_float;
     public bool      groggyAttack_bool;
     //-------------------------------------------------궁
     BoxCollider ultimateColl;
@@ -83,9 +83,9 @@ public class PlayerDataLoader : Action
     public float skillDelayTime_1;
     public float skillDelayTime_2;
     //-------------------------------------------------그로기시스템 관련
-    int groggyCount;
-    float parts_HP;
-    int parts_Count;
+    int     groggyCount;
+    float    parts_HP;
+    int     parts_Count;
     public int buttonActionGayge;
     public GameObject partsOb;
     //-------------------------------------------------라벨 관련
@@ -108,6 +108,7 @@ public class PlayerDataLoader : Action
     ShakeCamera     shakeCam;
     Animator        ani_Player;
     Animator        ani_Monster;
+    InvenManager    invenManager;
     public Motor    motor;
 
     void Awake()
@@ -118,6 +119,7 @@ public class PlayerDataLoader : Action
         ani_Player = GameObject.Find("Player").GetComponent<Animator>();
         ani_Monster = GameObject.Find("Monster").GetComponent<Animator>();
         shakeCam = GameObject.Find("CamManager").GetComponent<ShakeCamera>();
+        invenManager = GameObject.Find("Inventory Manager").GetComponent<InvenManager>();
 
         ultimateColl = GameObject.Find("UltimateButton").GetComponent<BoxCollider>();
         
@@ -352,16 +354,16 @@ public class PlayerDataLoader : Action
     /// </summary>
     void MonsterGroggyAttack()
     {
-        if (gorggyAttack_float > 0 && groggyAttack_bool == true)
+        if (groggyAttack_float > 0 && groggyAttack_bool == true)
         {
-            gorggyAttack_float -= 1;
+            groggyAttack_float -= 1;
         }
         else { 
-        if (gorggyAttack_float <= 0 && groggyAttack_bool == true)
+        if (groggyAttack_float <= 0 && groggyAttack_bool == true)
         {
                 if (ani_Monster.GetBool("Groggy") == true && groggyAttack_bool == true)
                 {
-                    float dist = Vector3.Distance(player_OB.position, monster_OB.position);
+                    float dist = Vector3.Distance(monster_OB.position, player_OB.position);
                     if (dist <= 1)
                     {
                         ani_Monster.SetBool("GroggyAttack", true);
@@ -384,7 +386,6 @@ public class PlayerDataLoader : Action
         {
           //  Debug.Log("버튼액션 이김");
             motor.moveSpeed = 7;
-          //  buttonActionGayge = 0;
 
             playerControl.AttackEnd();
             monsterControl.AttackEnd();
@@ -392,7 +393,6 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
-            //cam_1.gameObject.SetActive(true);
             playerControl.camObject[2].gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
 
@@ -400,6 +400,7 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("Lose", true);
                         
             monsterNowHP = 0;
+            ani_Player.speed = 1f;
         }
         if (buttonActionGayge <= 0)
         {
@@ -412,9 +413,6 @@ public class PlayerDataLoader : Action
             ani_Monster.SetBool("GroggyAttack", false);
             ani_Player.SetBool("Defend_1", false);
             buttonActionPanel.gameObject.SetActive(false);
-            sliderPanel.gameObject.SetActive(true);
-            buttonPanelActive_1.gameObject.SetActive(true);
-            buttonPanelActive_2.gameObject.SetActive(true);
             cam_1.gameObject.SetActive(true);
             cam_2.gameObject.SetActive(false);
 
@@ -425,6 +423,7 @@ public class PlayerDataLoader : Action
 
             groggyCount += 1;
             monsterNowHP = monsterHp * 0.4f;
+            ani_Player.speed = 1f;
         }
     }
     /// <summary>
@@ -589,6 +588,7 @@ public class PlayerDataLoader : Action
             {
                 parts_Count -= 1;
                 ani_Monster.SetBool("PartsD", true);
+                invenManager.tTest_1(); // 부분파괴 성공시 아이템을 획득하게 됩니다. [단, 게임에 졌을경우에는 얻지 못합니다.]
                 partsOb.gameObject.SetActive(false);
             }
             else
@@ -611,7 +611,8 @@ public class PlayerDataLoader : Action
         else if (monsterNowHP <= monsterHp * 0.2f && groggyCount == 1)
         {
             ani_Monster.SetBool("Groggy", true);
-            gorggyAttack_float = 13;
+            if (groggyAttack_float <= 0)
+                groggyAttack_float = 13;
             groggyAttack_bool = true;
             //groggyCount -= 1;
             return;

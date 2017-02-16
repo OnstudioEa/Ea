@@ -301,6 +301,10 @@ public class MonsterControl : MonoBehaviour
     { 
         monsterEffect[0].gameObject.SetActive(true);
     }
+    public void AttackEffectEnd()
+    {
+        monsterEffect[0].gameObject.SetActive(false);
+    }
     /// <summary>
     /// 그로기 종료
     /// </summary>

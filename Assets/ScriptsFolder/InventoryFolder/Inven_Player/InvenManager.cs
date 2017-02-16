@@ -4,9 +4,10 @@ using System.Collections;
 public class InvenManager : MonoBehaviour
 {
     public UIPanel[] item_Panel;
+    public GameObject[] invenObject;
 
     public InventoryController itemCtrl;
-
+    
     void Awake()
     {
         item_Panel[0].gameObject.SetActive(false);
@@ -28,8 +29,6 @@ public class InvenManager : MonoBehaviour
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
     }
-
-
     public void Test_1()
     {
         GetItem(Inven_Item_Type.Powder_A);
@@ -49,6 +48,41 @@ public class InvenManager : MonoBehaviour
     {
         itemCtrl.UpdateItemDetaDestroy();
         item_Panel[1].gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 부분파괴 아이템 관련으로 사용중
+    /// </summary>
+    public void tTest_1()
+    {
+        GetItem(Inven_Item_Type.Powder_A);
+        Debug.Log("1");
+    }
+    /// <summary>
+    /// 아직 미정
+    /// </summary>
+    public void tTest_2()
+    {
+        GetItem(Inven_Item_Type.Metal_A);
+        Debug.Log("2");
+    }
+    /// <summary>
+    /// 인게임에서 승리하였을 경우에 아이템을 획득할 수 있습니다. [단, 중간에 종료하거나 패배 하였을 경우에는 아이템을 얻지 못합니다.]
+    /// </summary>
+    public void tTest_Save()
+    {
+        SaveInven();
+    }
+    public void CharacterUpgrade()
+    {
+        item_Panel[2].gameObject.SetActive(true);
+        invenObject[1].gameObject.SetActive(true);
+        invenObject[0].gameObject.SetActive(false);
+    }
+    public void CharacterUpgradeOff()
+    {
+        item_Panel[2].gameObject.SetActive(false);
+        invenObject[1].gameObject.SetActive(false);
+        invenObject[0].gameObject.SetActive(true);
     }
 
     public void GetItem(Inven_Item_Type type, int count = 1)

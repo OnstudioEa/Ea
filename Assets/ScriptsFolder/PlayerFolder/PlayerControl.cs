@@ -228,7 +228,6 @@ public class PlayerControl : MonoBehaviour
         {
             ani.SetBool("Defend", true);
             ani.SetBool("AttackMove", true);
-            Debug.Log("막기");
         }
     }
     /// <summary>
@@ -241,7 +240,6 @@ public class PlayerControl : MonoBehaviour
         {
             ani.SetBool("AttackMove", true);
             defendCheck = false;
-            Debug.Log("막기_1");
         }
     }
     /// <summary>
@@ -546,6 +544,20 @@ public class PlayerControl : MonoBehaviour
         else
             if (player_Sound_Count == 1)
             AudioSource.PlayClipAtPoint(player_Sound[1], trans.position);
+    }
+    public void CutActionCtrlButtonOn()
+    {
+        playerAttackData.sliderPanel.gameObject.SetActive(true);
+        playerAttackData.buttonPanelActive_1.gameObject.SetActive(true);
+        playerAttackData.buttonPanelActive_2.gameObject.SetActive(true);
+        ani.SetBool("Hit", false);
+        ani.SetBool("Hit1", false);
+        motor.moveSpeed = 7;
+
+        if (playerAttackData.ultimateTime > 0)
+        {
+            ani.speed = 1.25f;
+        }
     }
 }
 

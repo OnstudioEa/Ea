@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
     public Camera uiCam;
     public GameObject frameCheck;
     public string sceneToLoad;
+    public string invenToLoad;
 
     public GameObject test_BackGround;
     
     public UIPanel ingame_PausePanel;
     void Awake()
     {
-        Application.targetFrameRate = 45;
+        Application.targetFrameRate = 60;
        // frameCheck.gameObject.SetActive(false);
         state = State.idle;
         StartCoroutine(FSM());
@@ -88,6 +89,10 @@ public class GameManager : MonoBehaviour
     {
         DataManager.Instance.ChangeScene(sceneToLoad);
         Time.timeScale = 1;
+    }
+    public void InvenStartButton()
+    {
+        DataManager.Instance.ChangeScene(invenToLoad);
     }
     public void IngameStart()
     {
