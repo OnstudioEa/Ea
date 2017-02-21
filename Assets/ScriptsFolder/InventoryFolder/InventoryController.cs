@@ -30,25 +30,6 @@ public class InventoryController : MonoBehaviour
          //TestCode_SaveManager.Instance.Initialize();
         item_Sprite = m_grid.GetComponentsInChildren<UISprite>();        
     }    
-    /*void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 10, 100, 30), "AddItem_P_A"))
-        {
-            GetItem(Inven_Item_Type.Powder_A);
-        }
-        if (GUI.Button(new Rect(10, 50, 100, 30), "AddItem_M_A"))
-        {
-            GetItem(Inven_Item_Type.Metal_A);
-        }
-        if (GUI.Button(new Rect(10, 90, 100, 30), "AddItem_P_A"))
-        {
-             GetItem(Inven_Item_Type.Part_A);            
-        }
-        if (GUI.Button(new Rect(10, 130, 100, 30), "Save"))
-        {
-            SaveInven();            
-        }
-    }*/
     public void GetItem(Inven_Item_Type type, int count = 1)
     {
         TestCode_SaveManager.Instance.Add(type, count);

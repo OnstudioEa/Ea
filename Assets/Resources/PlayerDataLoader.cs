@@ -446,7 +446,7 @@ public class PlayerDataLoader : Action
 
             if (playerNowHP > playerHp * 0.1f)
             { //[궁온] 피가 1씩 닳음;
-                playerNowHP -= 1f;
+                playerNowHP -= 0.3f;
             }
             if (ultimateTime <= 0)
             {
@@ -588,7 +588,7 @@ public class PlayerDataLoader : Action
             {
                 parts_Count -= 1;
                 ani_Monster.SetBool("PartsD", true);
-                invenManager.tTest_1(); // 부분파괴 성공시 아이템을 획득하게 됩니다. [단, 게임에 졌을경우에는 얻지 못합니다.]
+                invenManager.Parts_Get(); // 부분파괴 성공시 아이템을 획득하게 됩니다. [단, 게임에 졌을경우에는 얻지 못합니다.]
                 partsOb.gameObject.SetActive(false);
             }
             else

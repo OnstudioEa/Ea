@@ -131,7 +131,18 @@ public class PlayerControl : MonoBehaviour
     {
         if (attackCheck)
         {
-            ani.SetBool("Attack1", true);
+            float dist = Vector3.Distance(target.position, trans.position);
+            if (dist > 1.5f && dist < 3)
+            {
+                PlayerDefendLook();
+                ani.SetBool("JumpAttack", true);
+                Debug.Log("Jump Attack");
+            }
+            else
+            {
+                ani.SetBool("Attack1", true);
+                Debug.Log("Base Attack");
+            }
             ani.SetBool("Attack2", true);
             ani.SetBool("Attack3", true);
             motor.moveSpeed = 0;
@@ -139,6 +150,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackStart()
     {
+        ani.SetBool("JumpAttack", false);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
@@ -152,8 +164,11 @@ public class PlayerControl : MonoBehaviour
         skillCheck = false;
         attackCheck = true;
         defendCheck = false;
+
         if (ani.GetBool("Ultimated") == false)
             ani.SetBool("AttackMove", true);
+
+        ani.SetBool("JumpAttack", false);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
@@ -164,6 +179,7 @@ public class PlayerControl : MonoBehaviour
         defend_Coll.enabled = true;
         // 이펙트
         playerEffect[0].gameObject.SetActive(false);
+        playerEffect[13].gameObject.SetActive(false);
 
         attackCount_Effect = 1;
         playerEffect[4].gameObject.SetActive(false);
@@ -188,6 +204,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackFalse()
     {
+        ani.SetBool("JumpAttack", false);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
@@ -253,6 +270,7 @@ public class PlayerControl : MonoBehaviour
         skillCheck = true;
         weaponeSlash.gameObject.SetActive(false);
         playerEffect[0].gameObject.SetActive(false);
+        playerEffect[13].gameObject.SetActive(false);
     }
     /// <summary>
     ///  막기
@@ -266,7 +284,9 @@ public class PlayerControl : MonoBehaviour
 
         playerEffect[4].gameObject.SetActive(false);
         playerEffect[0].gameObject.SetActive(false);
+        playerEffect[13].gameObject.SetActive(false);
 
+        ani.SetBool("JumpAttack", false);
         ani.SetBool("Attack1", false);
         ani.SetBool("Attack2", false);
         ani.SetBool("Attack3", false);
@@ -403,6 +423,11 @@ public class PlayerControl : MonoBehaviour
                 playerEffect[0].gameObject.SetActive(true);
                 playerEffect[1].gameObject.SetActive(false);
             }
+            if (ani.GetBool("JumpAttack") == true)
+            {
+                playerEffect[13].gameObject.SetActive(true);
+                playerEffect[1].gameObject.SetActive(false);
+            }
         }
         else
             return;
@@ -436,6 +461,7 @@ public class PlayerControl : MonoBehaviour
             {
                 playerEffect[2].gameObject.SetActive(true);
                 playerEffect[0].gameObject.SetActive(false);
+                playerEffect[13].gameObject.SetActive(false);
             }
         }
         else

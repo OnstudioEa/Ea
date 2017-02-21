@@ -151,9 +151,10 @@ public class MonsterControl : MonoBehaviour
             {
                 if (dist < 2 && dist >= 1.9f)
                 {
-                    jumpbool = true;
-                    state = State.attack;
-                    return;
+                    //점프공격 스크립트 일시적으로 막겠음 [플레이어 점프공격 테스트를 위함]
+                   // jumpbool = true;
+                   // state = State.attack;
+                   // return;
                 }
                 else
                 {
