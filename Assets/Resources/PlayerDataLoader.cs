@@ -62,7 +62,7 @@ public class PlayerDataLoader : Action
 
     public Transform player_OB;
     public Transform monster_OB;
-    float             groggyAttack_float;
+    public float             groggyAttack_float;
     public bool      groggyAttack_bool;
     //-------------------------------------------------궁
     BoxCollider ultimateColl;

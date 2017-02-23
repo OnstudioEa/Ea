@@ -10,6 +10,7 @@ public class InvenManager : MonoBehaviour
     
     void Awake()
     {
+       // PlayerPrefs.DeleteAll(); 초기화
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
 
@@ -37,15 +38,15 @@ public class InvenManager : MonoBehaviour
     }
     public void Test_1()
     {
-        GetItem(Inven_Item_Type.Powder_A, Random.Range(1,4));
+         GetItem(Inven_Item_Type.Material_A_Parts, 1);
     }
     public void Test_2()
     {
-        GetItem(Inven_Item_Type.Metal_A, 1);
+        GetItem(Inven_Item_Type.Material_A_Hp, 1);
     }
     public void Test_3()
     {
-        GetItem(Inven_Item_Type.Part_A, 1);
+        GetItem(Inven_Item_Type.Material_C_Money, 1);
     }
     public void Test_Save()
     {
@@ -57,7 +58,7 @@ public class InvenManager : MonoBehaviour
     /// </summary>
     public void Parts_Get()
     {
-        GetItem(Inven_Item_Type.Powder_A, 1);
+        GetItem(Inven_Item_Type.Material_A_Parts, 1);
     }
     /// <summary>
     /// 아직 미정

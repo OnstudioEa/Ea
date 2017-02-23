@@ -37,6 +37,19 @@ public class ItemScript : MonoBehaviour
     {
         m_Up_sprIcon[0].gameObject.SetActive(true);
         m_Up_sprIcon[0].spriteName = m_strSpriteName;
-        Debug.Log(m_strSpriteName + "이 클릭되었습니다.");
+
+        if (m_strSpriteName == "1002")
+        {
+            m_Up_sprIcon[1].spriteName = "1000";
+            m_Up_sprIcon[2].spriteName = "WeaPone";
+            m_Up_sprIcon[1].gameObject.SetActive(true);
+            m_Up_sprIcon[2].gameObject.SetActive(true);
+        }
+        else
+        {
+            m_Up_sprIcon[1].gameObject.SetActive(false);
+            m_Up_sprIcon[2].gameObject.SetActive(false);
+        }
+        
     }
 }

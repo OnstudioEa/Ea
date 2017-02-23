@@ -33,17 +33,17 @@ public enum Inven_Item_Type
 {
     [StringValue("None")] None = 0,
 
-    [StringValue("P_A")]  Powder_A  = 1000,
-    [StringValue("P_B")]  Powder_B  = 1001,
-    [StringValue("P_C")]  Powder_C  = 1002,
+    [StringValue("P_A")]  Material_A_Parts  = 1000,
+    [StringValue("P_B")]  Material_A_Hp     = 1001,
+    [StringValue("P_C")]  Material_C_Money  = 1002,
                           
-    [StringValue("M_A")]  Metal_A    = 2000,
-    [StringValue("M_B")]  Metal_B    = 2001,
-    [StringValue("M_C")]  Metal_C    = 2002,
+    [StringValue("M_A")]  Weapon_A_1        = 2000,
+    [StringValue("M_B")]  Weapon_B_2        = 2001,
+    [StringValue("M_C")]  Weapon_C_3        = 2002,
                           
-    [StringValue("P_A")]  Part_A     = 3000,
-    [StringValue("P_B")]  Part_B     = 3001,
-    [StringValue("P_C")]  Part_C     = 3002,
+    [StringValue("P_A")]  Armor_A_Head      = 3000,
+    [StringValue("P_B")]  Armor_B_Body      = 3001,
+    [StringValue("P_C")]  Armor_C_shoes     = 3002,
 }
 
 public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
@@ -136,13 +136,13 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
                 int_Name = _inven._lstItme[i].unigueNo;
                 inventoryCon.UpdataItemDeta();
             }
-            if (_inven._lstItme[i].unigueNo == 2000)
+            if (_inven._lstItme[i].unigueNo == 1001)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
                 inventoryCon.UpdataItemDeta();
             }
-            if (_inven._lstItme[i].unigueNo == 3000)
+            if (_inven._lstItme[i].unigueNo == 1002)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
@@ -183,13 +183,13 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
                 int_Name = _inven._lstItme[i].unigueNo;
                 inventoryCon.StartItemLoader();
             }
-            if (_inven._lstItme[i].unigueNo == 2000)
+            if (_inven._lstItme[i].unigueNo == 1001)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
                 inventoryCon.StartItemLoader();
             }
-            if (_inven._lstItme[i].unigueNo == 3000)
+            if (_inven._lstItme[i].unigueNo == 1002)
             {
                 item_int = _inven._lstItme[i].count;
                 int_Name = _inven._lstItme[i].unigueNo;
