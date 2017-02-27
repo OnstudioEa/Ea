@@ -248,13 +248,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.20886075
-        functionName: OffAttack_B
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.20253165
         functionName: AttackHit
         data: 
@@ -262,14 +255,21 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.43987343
+      - time: 0.20886075
+        functionName: OffAttack_B
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.49136394
         functionName: AttackFalse
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.51898736
+      - time: 0.5054373
         functionName: MoveSpeedCheck
         data: 
         objectReferenceParameter: {instanceID: 0}

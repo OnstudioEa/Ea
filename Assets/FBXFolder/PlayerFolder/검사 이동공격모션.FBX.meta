@@ -220,6 +220,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: AttackEffect_1
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.06588298
         functionName: AttackStart
         data: 
@@ -241,13 +248,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.387391
-        functionName: AttackHit
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.3503018
         functionName: OffAttack_B
         data: 
@@ -255,14 +255,21 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.53080815
+      - time: 0.387391
+        functionName: AttackHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.614819
         functionName: AttackFalse
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.57197315
+      - time: 0.6207536
         functionName: MoveSpeedCheck
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -271,13 +278,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.9943228
         functionName: AttackEnd
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0
-        functionName: AttackEffect_1
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

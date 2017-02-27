@@ -18,14 +18,22 @@ public class GameManager : MonoBehaviour
     public string invenToLoad;
 
     public GameObject test_BackGround;
-    
+
+    public GameObject[] modelling;
+
+
     public UIPanel ingame_PausePanel;
     void Awake()
     {
-        Application.targetFrameRate = 60;
-       // frameCheck.gameObject.SetActive(false);
+        // frameCheck.gameObject.SetActive(false);
+        PlayerPrefs.GetInt("Money");
+        PlayerPrefs.GetInt("Modelling");
+        PlayerPrefs.SetInt("Modelling",1);
+        ModellingCheck();
+
+        Application.targetFrameRate = 60;                
         state = State.idle;
-        StartCoroutine(FSM());
+        StartCoroutine(FSM());        
     }
     IEnumerator FSM()
     {
@@ -42,6 +50,24 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
     }
+    // ------------ 돈 및 모델링 레벨에 관련된 스크립트--------------
+    public void ModellingCheck()
+    {
+        if (PlayerPrefs.GetInt("Modelling") == 0)
+        {
+            modelling[0].gameObject.SetActive(true);
+            modelling[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("Modelling") == 1)
+            {
+                modelling[0].gameObject.SetActive(false);
+                modelling[1].gameObject.SetActive(true);
+            }
+        }
+    }
+    // ------------ 돈 및 모델링 레벨에 관련된 스크립트--------------
     void RayCast()
     {
         if (0 < Input.touchCount)

@@ -269,14 +269,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5012921
+      - time: 0.60969317
         functionName: AttackFalse
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5603224
+      - time: 0.6253631
         functionName: MoveSpeedCheck
         data: 
         objectReferenceParameter: {instanceID: 0}

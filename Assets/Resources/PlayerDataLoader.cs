@@ -52,7 +52,6 @@ public class PlayerDataLoader : Action
     public MonsterShaderChange monsterShaderChange;
     public MonsterShaderChange monsterShaderChange_1;
     int                 animationDelay_Player;
-    public MonsterShaderChange monsterShaderChange_2;
     public MonsterShaderChange monsterShaderChange_3;
     public MonsterShaderChange monsterShaderChange_4;
     //-------------------------------------------------겨루기 관련
@@ -229,7 +228,6 @@ public class PlayerDataLoader : Action
             }
 
             animationDelay_Player = 2;
-            monsterShaderChange_2.rend.sharedMaterial = monsterShaderChange_2.material[1];
             monsterShaderChange_3.rend.sharedMaterial = monsterShaderChange_3.material[1];
             monsterShaderChange_4.rend.sharedMaterial = monsterShaderChange_4.material[1];
             AttackDamage_Monster();
@@ -344,8 +342,9 @@ public class PlayerDataLoader : Action
                 player_Mt[3].SetFloat("_node_3052", 1);
                 player_Mt[4].SetFloat("_node_3052", 1);
                 player_Mt[5].SetFloat("_node_3052", 1);
-
-                Debug.Log("끝났습니다~");
+                invenManager.tTest_2(); // 기본아이템 획득
+                invenManager.MoneyGet(); // 300 ~ 699 돈 획득
+                invenManager.tTest_Save(); //아이템 저장
             }
         }
     }
@@ -453,8 +452,7 @@ public class PlayerDataLoader : Action
                  //[궁오프] 원래대로 돌아오게 됨
                 playerPower = playerPower * 0.5f;
                 ani_Player.speed = 1f;
-
-                monsterShaderChange_2.rend.sharedMaterial = monsterShaderChange_2.material[0];
+                
                 monsterShaderChange_3.rend.sharedMaterial = monsterShaderChange_3.material[0];
                 monsterShaderChange_4.rend.sharedMaterial = monsterShaderChange_4.material[0];
                 playerControl.playerEffect[7].gameObject.SetActive(false);
@@ -658,7 +656,6 @@ public class PlayerDataLoader : Action
             animationDelay_Player -= 1;
             if (animationDelay_Player <= 0)
             {
-                monsterShaderChange_2.rend.sharedMaterial = monsterShaderChange_2.material[0];
                 monsterShaderChange_3.rend.sharedMaterial = monsterShaderChange_3.material[0];
                 monsterShaderChange_4.rend.sharedMaterial = monsterShaderChange_4.material[0];
             }

@@ -136,12 +136,10 @@ public class PlayerControl : MonoBehaviour
             {
                 PlayerDefendLook();
                 ani.SetBool("JumpAttack", true);
-                Debug.Log("Jump Attack");
             }
             else
             {
                 ani.SetBool("Attack1", true);
-                Debug.Log("Base Attack");
             }
             ani.SetBool("Attack2", true);
             ani.SetBool("Attack3", true);
@@ -211,7 +209,7 @@ public class PlayerControl : MonoBehaviour
         attackCheck = false;
         defendCheck = false;
         skillCheck = false;
-        ani.SetBool("AttackMove", true);
+       // ani.SetBool("AttackMove", true);
     }
     public void IdleStart()
     {
@@ -223,7 +221,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void AttackTrue()
     {
-        state = State.idle;
+       // state = State.idle;
         attackCheck = true;
     }
     public void AttackHit()
@@ -234,6 +232,8 @@ public class PlayerControl : MonoBehaviour
     public void MoveSpeedCheck()
     {
         motor.moveSpeed = 7;
+        ani.SetBool("AttackMove", true);
+        Debug.Log("스피드 작용?");
     }
     public void MoveSpeedCheckOff()
     {
@@ -541,7 +541,6 @@ public class PlayerControl : MonoBehaviour
     public void UltimatedAction()
     {
         //메터리얼
-        playerAttackData.monsterShaderChange_2.rend.sharedMaterial = playerAttackData.monsterShaderChange_2.material[2];
         playerAttackData.monsterShaderChange_3.rend.sharedMaterial = playerAttackData.monsterShaderChange_3.material[2];
         playerAttackData.monsterShaderChange_4.rend.sharedMaterial = playerAttackData.monsterShaderChange_4.material[2];
 

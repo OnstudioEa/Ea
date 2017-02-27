@@ -34,7 +34,7 @@ public enum Inven_Item_Type
     [StringValue("None")] None = 0,
 
     [StringValue("P_A")]  Material_A_Parts  = 1000,
-    [StringValue("P_B")]  Material_A_Hp     = 1001,
+    [StringValue("P_B")]  Material_A_Mtr    = 1001,
     [StringValue("P_C")]  Material_C_Money  = 1002,
                           
     [StringValue("M_A")]  Weapon_A_1        = 2000,

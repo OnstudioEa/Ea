@@ -147,15 +147,15 @@ public class MonsterControl : MonoBehaviour
                 state = State.idle;
                 return;
             }
-            else
-            {
-                if (dist < 2 && dist >= 1.9f)
-                {
+           // else
+           // {
+               // if (dist < 2 && dist >= 1.9f)
+               // {
                     //점프공격 스크립트 일시적으로 막겠음 [플레이어 점프공격 테스트를 위함]
                    // jumpbool = true;
                    // state = State.attack;
                    // return;
-                }
+               // }
                 else
                 {
                     ani.SetBool("Move", true);
@@ -168,7 +168,7 @@ public class MonsterControl : MonoBehaviour
                     trans.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 1.2f);
                     trans.Translate(Vector3.forward * Time.deltaTime * speed);
                 }
-            }
+           // }
         }
     }
     void Attack()
