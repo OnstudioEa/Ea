@@ -60,18 +60,18 @@ public class InvenManager : MonoBehaviour
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
     }
-    public void Test_1()
-    {
-         GetItem(Inven_Item_Type.Material_A_Parts, 1);
-    }
-    public void Test_2()
-    {
-        GetItem(Inven_Item_Type.Material_A_Mtr, 1);
-    }
-    public void Test_3()
-    {
-        GetItem(Inven_Item_Type.Material_C_Money, 1);
-    }
+    //public void Test_1()
+    //{
+    //     GetItem(Inven_Item_Type.Material_A_Parts, 1);
+    //}
+    //public void Test_2()
+    //{
+    //    GetItem(Inven_Item_Type.Material_A_Mtr, 1);
+    //}
+    //public void Test_3()
+    //{
+    //    GetItem(Inven_Item_Type.Material_C_Money, 1);
+    //}
     public void Test_Save()
     {
         itemCtrl.UpdateItemDetaDestroy();
