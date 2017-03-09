@@ -344,7 +344,7 @@ public class PlayerDataLoader : Action
                 player_Mt[5].SetFloat("_node_3052", 1);
                 invenManager.tTest_2(); // 기본아이템 획득
                 invenManager.MoneyGet(); // 300 ~ 699 돈 획득
-                invenManager.tTest_Save(); //아이템 저장
+                invenManager.SaveInven(); //아이템 저장
             }
         }
     }
