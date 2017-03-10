@@ -22,14 +22,20 @@ public class UIManager : Convey
     float dist_1;
     float dist_2;
 
+    public float tt_1;
+
+    bool windowOnCheck;
+
+    public InvenManager invenManager;
+   
     void Awake()
     {
         state = State.idle;
         StartCoroutine(FSM());
 
-        //player = gameObject.transform;
-        //ui_Ob[0] = gameObject.transform;
-        //ui_Ob[1] = gameObject.transform;
+        player = GameObject.Find("Player").gameObject.transform;
+        ui_Ob[0] = GameObject.Find("forge").gameObject.transform;
+        ui_Ob[1] = GameObject.Find("tresure_box").gameObject.transform;
         //ui_Ob[2] = gameObject.transform;
 
     }
@@ -42,21 +48,48 @@ public class UIManager : Convey
     }
     IEnumerator idle()
     {
-       // PositionCheck();
-        yield return new WaitForSeconds(0.5f);
+        PositionCheck();
+        yield return new WaitForSeconds(0.1f);
     }
     public void PositionCheck()
     {
-        dist = Vector3.Distance(ui_Ob[0].position, player.position);
-        if (dist < 2)
-            Debug.Log("0이 가깝다!!!");
-        dist_1 = Vector3.Distance(ui_Ob[1].position, player.position);
-        if (dist < 2)
-            Debug.Log("0이 가깝다!!!");
+        Vector3 obPos = ui_Ob[0].transform.position;
+        dist = (obPos - player.position).sqrMagnitude;
+
+        Vector3 obPos1 = ui_Ob[1].transform.position;
+        dist_1 = (obPos1 - player.position).sqrMagnitude;
+
+        if (dist < tt_1)
+        {
+            if (windowOnCheck == false)
+            {
+                windowOnCheck = true;
+                invenManager.UpgradeWindowOn();
+                Debug.Log("0이 가깝다!!!");
+                return;
+            }
+        }
+        else
+        {
+            if (dist_1 < tt_1)
+            {
+                if (windowOnCheck == false)
+                {
+                    windowOnCheck = true;
+                    invenManager.ItemWindowOn();
+                    Debug.Log("1이 가깝다!!!");
+                    return;
+                }
+            }
+            else
+            {
+                windowOnCheck = false;
+                invenManager.ItemWindowOff();
+            }
+        }
     }
     public override void UIPosConvey()
     {
         arrowOb[0].transform.position = arrowPos[0].transform.position;
-        Debug.Log("위치업뎃");
     }
 }

@@ -30,6 +30,8 @@ public class MonsterControl : MonoBehaviour
     int attackNumber = 0;
     bool attackbool;
     bool jumpbool;
+    public bool jumpMoveCheck;
+    public bool attackCheck;
     //----------------데미지 전달
     public GameObject   taggedAction;
     List<Action> action = new List<Action>();
@@ -102,19 +104,21 @@ public class MonsterControl : MonoBehaviour
         {
             Attack();
         }
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(0.5f);
     }
     IEnumerator move()
     {
-        if (state == State.move)
-        {
+        //if (state == State.move)
+        //{
+            JumpAttackMove();
             Move();
-        }
+        //}
         yield return new WaitForEndOfFrame();
     }
     
     void Idle()
     {
+        attackCheck = true;
         if (target != null)
         {
             float dist = Vector3.Distance(target.position, trans.position);
@@ -138,77 +142,111 @@ public class MonsterControl : MonoBehaviour
     }
     void Move()
     {
-        if (ani.GetBool("Groggy") == false && ani.GetBool("Died") == false)
+        if (jumpbool == false)
         {
-            float dist = Vector3.Distance(target.position, trans.position);
-            if (dist < 0.8f)
+            if (ani.GetBool("Groggy") == false && ani.GetBool("Died") == false)
             {
-                ani.SetBool("Move", false);
-                state = State.idle;
-                return;
-            }
-           // else
-           // {
-               // if (dist < 2 && dist >= 1.9f)
-               // {
-                    //점프공격 스크립트 일시적으로 막겠음 [플레이어 점프공격 테스트를 위함]
-                   // jumpbool = true;
-                   // state = State.attack;
-                   // return;
-               // }
+                float dist = Vector3.Distance(target.position, trans.position);
+                if (dist < 0.8f)
+                {
+                    ani.SetBool("Move", false);
+                    state = State.idle;
+                    return;
+
+                }
                 else
                 {
-                    ani.SetBool("Move", true);
-                    lookDir = (target.position - this.trans.position);
-                    lookDir.Normalize();
+                    if (dist < 2 && dist >= 1.9f)
+                    {
+                        //점프공격 스크립트 일시적으로 막겠음[플레이어 점프공격 테스트를 위함]
+                        jumpbool = true;
+                        state = State.attack;
+                        return;
+                    }
+                    else
+                    {
+                        ani.SetBool("Move", true);
+                        lookDir = (target.position - this.trans.position);
+                        lookDir.Normalize();
 
-                    Quaternion from = this.trans.rotation;
-                    Quaternion to = Quaternion.LookRotation(lookDir);
+                        Quaternion from = this.trans.rotation;
+                        Quaternion to = Quaternion.LookRotation(lookDir);
 
-                    trans.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 1.2f);
-                    trans.Translate(Vector3.forward * Time.deltaTime * speed);
+                        trans.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 1.2f);
+                        trans.Translate(Vector3.forward * Time.deltaTime * speed);
+                    }
                 }
-           // }
+            }
         }
+    }
+    public void JumpAttackMove()
+    {
+        if (jumpMoveCheck == true)
+        {
+            lookDir = (target.position - this.trans.position);
+            lookDir.Normalize();
+
+            Quaternion from = this.trans.rotation;
+            Quaternion to = Quaternion.LookRotation(lookDir);
+
+            trans.rotation = Quaternion.Lerp(from, to, Time.fixedDeltaTime * 1.2f);
+            trans.Translate(Vector3.forward * Time.deltaTime * 1.5f);
+            
+        }
+    }
+    public void JumpAttackStart()
+    {
+        jumpMoveCheck = true;
+    }
+    public void JumpAttackEnd()
+    {
+        jumpMoveCheck = false;
     }
     void Attack()
     {
         ani.SetBool("Idle", false);
         ani.SetBool("Move", false);
-
-        if (attackbool == true)
+        if (attackCheck == true)
         {
-            ani.SetBool("BackAttack", true);
-            attackDist = 1;
-            attackDist_1 = 50;
-            return;
-        }
-        else
-        {
-            if (jumpbool == true)
+            attackCheck = false;
+            if (attackbool == true)
             {
-                //Debug.Log("점프공격 실시");
+                ani.SetBool("BackAttack", true);
                 attackDist = 1;
                 attackDist_1 = 50;
-                ani.SetBool("Attack2", true);
+                Debug.Log("1");
                 return;
             }
             else
             {
-                attackNumber = Random.Range(1, 3);
-                if (attackNumber == 1)
+                if (jumpbool == true)
                 {
-                    attackDist = 1;
-                    attackDist_1 = 150;
-                    ani.SetBool("Attack1", true);
+                    attackDist = 2;
+                    attackDist_1 = 180;
+                    ani.SetBool("Attack2", true);
+                    Debug.Log("2");
+                    state = State.move;
                     return;
                 }
-                if (attackNumber == 2)
+                else
                 {
-                    attackDist = 40;
-                    attackDist_1 = 40;
-                    ani.SetBool("Attack3", true);
-                    return;
+                    attackNumber = Random.Range(1, 3);
+                    if (attackNumber == 1)
+                    {
+                        attackDist = 1;
+                        attackDist_1 = 150;
+                        ani.SetBool("Attack1", true);
+                        Debug.Log("3");
+                        return;
+                    }
+                    if (attackNumber == 2)
+                    {
+                        attackDist = 40;
+                        attackDist_1 = 40;
+                        ani.SetBool("Attack3", true);
+                        Debug.Log("4");
+                        return;
+                    }
                 }
             }
         }
@@ -293,6 +331,7 @@ public class MonsterControl : MonoBehaviour
         ani.SetBool("Idle", true);
         
         monsterEffect[0].gameObject.SetActive(false);
+        monsterEffect[2].gameObject.SetActive(false);
 
         attackbool = false;
         jumpbool = false;
@@ -364,5 +403,10 @@ public class MonsterControl : MonoBehaviour
     public void ActionEffectOff()
     {
         monsterEffect[1].gameObject.SetActive(false);
+    }
+    public void JumpAttackEffect()
+    {
+        //monsterEffect[2].transform.position = this.gameObject.transform.position;
+        monsterEffect[2].gameObject.SetActive(true);
     }
 }

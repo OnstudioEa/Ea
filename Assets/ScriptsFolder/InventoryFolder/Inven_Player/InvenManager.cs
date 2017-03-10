@@ -45,8 +45,9 @@ public class InvenManager : MonoBehaviour
         money_LB[0].text = PlayerPrefs.GetInt("Money").ToString(); //인게임에 적용시켜야 오류없음
         money_LB[1].text = m.ToString();
     }
-    public void UpgradeWondowOn()
+    public void UpgradeWindowOn()
     {
+        SaveInven();
         item_Panel[1].gameObject.SetActive(true);
     }
     public void ItemWindowOn()
@@ -58,7 +59,7 @@ public class InvenManager : MonoBehaviour
     }
     public void ItemWindowOff()
     {
-        SaveInven();
+        //SaveInven();
         //itemCtrl.UpdateItemDetaDestroy();
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
