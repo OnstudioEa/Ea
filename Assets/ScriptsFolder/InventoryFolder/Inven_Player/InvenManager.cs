@@ -9,10 +9,14 @@ public class InvenManager : MonoBehaviour
     public UILabel[] money_LB;
 
     public InventoryController itemCtrl;
+    public InvenVirtualJoysticks moveJoystick;
+
+    public int settingCount;
     
     void Awake()
     {
         // PlayerPrefs.DeleteAll(); 초기화
+        StartSetting();
 
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
@@ -49,13 +53,17 @@ public class InvenManager : MonoBehaviour
     {
         SaveInven();
         item_Panel[1].gameObject.SetActive(true);
+        invenObject[0].gameObject.SetActive(false);
+        moveJoystick.JostickReset();
     }
     public void ItemWindowOn()
     {
         SaveInven();
         //TestCode_SaveManager.Instance.Initialize();
         item_Panel[0].gameObject.SetActive(true);
-        
+        invenObject[0].gameObject.SetActive(false);
+        moveJoystick.JostickReset();
+        CamInvenPos();
     }
     public void ItemWindowOff()
     {
@@ -63,6 +71,21 @@ public class InvenManager : MonoBehaviour
         //itemCtrl.UpdateItemDetaDestroy();
         item_Panel[0].gameObject.SetActive(false);
         item_Panel[1].gameObject.SetActive(false);
+        CamPosReset();
+        if (settingCount == 2)
+        {
+            invenObject[0].gameObject.SetActive(true);
+        }
+    }
+    public void CamInvenPos()
+    {
+        invenObject[3].transform.position = invenObject[5].transform.position;
+        invenObject[3].transform.rotation = invenObject[5].transform.rotation;
+    }
+    public void CamPosReset()
+    {
+        invenObject[3].transform.position = invenObject[4].transform.position;
+        invenObject[3].transform.rotation = invenObject[4].transform.rotation;
     }
     //public void Test_1()
     //{
@@ -114,5 +137,20 @@ public class InvenManager : MonoBehaviour
     public void UpgradeButton()
     {
 
+    }
+    public void StartSetting()
+    {
+        invenObject[0].gameObject.SetActive(false);
+        invenObject[1].gameObject.SetActive(true);
+        invenObject[2].gameObject.SetActive(false);
+        settingCount = 1;
+    }
+    public void StartButtonSetting()
+    {
+        invenObject[0].gameObject.SetActive(true);
+        invenObject[1].gameObject.SetActive(false);
+        invenObject[2].gameObject.SetActive(true);
+        item_Panel[2].gameObject.SetActive(false);
+        settingCount = 2;
     }
 }

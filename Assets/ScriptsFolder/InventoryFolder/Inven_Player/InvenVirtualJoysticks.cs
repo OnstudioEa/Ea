@@ -44,6 +44,10 @@ public class InvenVirtualJoysticks : MonoBehaviour, IDragHandler, IPointerUpHand
     }
     public virtual void OnPointerUp(PointerEventData ped)
     {
+        JostickReset();
+    }
+    public void JostickReset()
+    {
         motor.ani.SetBool("Move", false);
         motor.state = InvenMotor.State.idle;
         inputVector = Vector3.zero;

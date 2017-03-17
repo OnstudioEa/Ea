@@ -149,6 +149,8 @@ public class MonsterControl : MonoBehaviour
                 float dist = Vector3.Distance(target.position, trans.position);
                 if (dist < 0.8f)
                 {
+                    monsterEffect[3].gameObject.SetActive(false);
+                    monsterEffect[4].gameObject.SetActive(false);
                     ani.SetBool("Move", false);
                     state = State.idle;
                     return;
@@ -159,6 +161,8 @@ public class MonsterControl : MonoBehaviour
                     if (dist < 2 && dist >= 1.9f)
                     {
                         //점프공격 스크립트 일시적으로 막겠음[플레이어 점프공격 테스트를 위함]
+                        monsterEffect[3].gameObject.SetActive(false);
+                        monsterEffect[4].gameObject.SetActive(false);
                         jumpbool = true;
                         state = State.attack;
                         return;
@@ -201,6 +205,16 @@ public class MonsterControl : MonoBehaviour
     public void JumpAttackEnd()
     {
         jumpMoveCheck = false;
+    }
+    public void MoveEffectRight()
+    {
+        monsterEffect[3].gameObject.SetActive(true);
+        monsterEffect[4].gameObject.SetActive(false);
+    }
+    public void MoveEffectLeft()
+    {
+        monsterEffect[4].gameObject.SetActive(true);
+        monsterEffect[3].gameObject.SetActive(false);
     }
     void Attack()
     {

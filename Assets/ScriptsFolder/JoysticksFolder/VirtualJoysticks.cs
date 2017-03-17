@@ -32,6 +32,7 @@ public class VirtualJoysticks : MonoBehaviour, IDragHandler, IPointerUpHandler, 
                 motor.state = Motor.State.move;
 
                 playerControl.ani.SetBool("Move", true);
+                playerControl.playerEffect[14].gameObject.SetActive(true);
 
                 Vector2 pos = Vector2.zero;
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle(bgImg.rectTransform, ped.position, ped.pressEventCamera, out pos))
@@ -59,6 +60,7 @@ public class VirtualJoysticks : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     public virtual void OnPointerUp(PointerEventData ped)
     {
         playerControl.ani.SetBool("Move", false);
+        playerControl.playerEffect[14].gameObject.SetActive(false);
         motor.state = Motor.State.idle;
         inputVector = Vector3.zero;
         joystickImg.rectTransform.anchoredPosition = Vector3.zero;

@@ -18,6 +18,8 @@ public class UIManager : Convey
     public Transform player;
     public Transform[] ui_Ob;
 
+    public string sceneToLoad;
+
     float dist;
     float dist_1;
     float dist_2;
@@ -58,6 +60,14 @@ public class UIManager : Convey
 
         Vector3 obPos1 = ui_Ob[1].transform.position;
         dist_1 = (obPos1 - player.position).sqrMagnitude;
+
+        Vector3 obPos2 = ui_Ob[2].transform.position;
+        dist_2 = (obPos2 - player.position).sqrMagnitude;
+
+        if ( dist_2 < tt_1)
+        {
+            DataManager.Instance.ChangeScene(sceneToLoad);
+        }
 
         if (dist < tt_1)
         {
