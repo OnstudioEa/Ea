@@ -29,6 +29,7 @@ public class UIManager : Convey
     bool windowOnCheck;
 
     public InvenManager invenManager;
+    public InventoryController invenCtlr;
    
     void Awake()
     {
@@ -75,7 +76,7 @@ public class UIManager : Convey
             {
                 windowOnCheck = true;
                 invenManager.UpgradeWindowOn();
-                Debug.Log("0이 가깝다!!!");
+                invenCtlr.PlayerUpgradeItemQuantity();
                 return;
             }
         }
@@ -87,7 +88,6 @@ public class UIManager : Convey
                 {
                     windowOnCheck = true;
                     invenManager.ItemWindowOn();
-                    Debug.Log("1이 가깝다!!!");
                     return;
                 }
             }

@@ -18,7 +18,7 @@ public class ItemScript : MonoBehaviour
 
     void Awake()
     {
-        MaterialNameCheck();
+    //    MaterialNameCheck();
 
     }
     // 정보를 설정하는 함수 입니다.
@@ -28,6 +28,7 @@ public class ItemScript : MonoBehaviour
         m_sprIcon.spriteName = spriteName;
 
         m_strSpriteName = spriteName;
+        m_label.name = spriteName;
     }
 
     public void SetInfo_1(int spriteValue)
@@ -39,7 +40,7 @@ public class ItemScript : MonoBehaviour
         Destroy(this.gameObject);
     }
     
-    void OnClick()
+ /*   void OnClick()
     {
         m_Up_sprIcon[0].gameObject.SetActive(true);
         m_Up_sprIcon[0].spriteName = m_strSpriteName;
@@ -85,5 +86,7 @@ public class ItemScript : MonoBehaviour
     {
         m_Up_strSpriteName1 = str1;
         m_Up_strSpriteName2 = str2;
-    }
+    }*/
+
+
 }

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         // frameCheck.gameObject.SetActive(false);
         PlayerPrefs.GetInt("Money");
         PlayerPrefs.GetInt("Modelling");
-        PlayerPrefs.SetInt("Modelling",1);
+        PlayerPrefs.SetInt("Modelling", 0);
         ModellingCheck();
 
         Application.targetFrameRate = 60;                
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         {
             modelling[0].gameObject.SetActive(true);
             modelling[1].gameObject.SetActive(false);
+            Debug.Log("0");
         }
         else
         {
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             {
                 modelling[0].gameObject.SetActive(false);
                 modelling[1].gameObject.SetActive(true);
+                Debug.Log("1");
             }
         }
     }
@@ -151,7 +153,6 @@ public class GameManager : MonoBehaviour
         if (testtest == false)
         {
             test_BackGround.gameObject.SetActive(true);
-            Debug.Log("켜짐");
             testtest = true;
             return;
         }
@@ -159,7 +160,6 @@ public class GameManager : MonoBehaviour
         {
             test_BackGround.gameObject.SetActive(false);
             testtest = false;
-            Debug.Log("꺼짐");
         }
     }
 }

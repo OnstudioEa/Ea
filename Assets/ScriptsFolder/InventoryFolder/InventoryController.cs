@@ -15,20 +15,30 @@ public class InventoryController : MonoBehaviour
     public UIGrid m_grid;
 
     public UISprite[] item_Sprite;
+    public UISprite[] upgrade_Sprite;
+    public UILabel[] upgrade_Label;
 
+    public int item_1;
+    public int item_2;
+    public int item_3;
+    
     public string Test_1;
-
+    public int startItemCheck;
     //-----------------------------------
-    public int item_Part_Count;
-
-    public string item_Part_Name;
+    public int      item_Part_Count;
+    public string   item_Part_Name;
     
     public TestCode_SaveManager testCode_SaveManager;
+    public InvenManager invenManager;
+    public GameManager gameManager;
 
     void Start()
     {
-         //TestCode_SaveManager.Instance.Initialize();
-        item_Sprite = m_grid.GetComponentsInChildren<UISprite>();        
+        //TestCode_SaveManager.Instance.Initialize();
+        item_Sprite = m_grid.GetComponentsInChildren<UISprite>();
+
+        PlayerUpgradeItemQuantity();
+        
     }    
     public void GetItem(Inven_Item_Type type, int count = 1)
     {
@@ -53,6 +63,10 @@ public class InventoryController : MonoBehaviour
                     break;
                 }
             }
+        }
+        else
+        {
+            UpdateItemDetaDestroy();
         }  
     }
     /// <summary>
@@ -60,23 +74,34 @@ public class InventoryController : MonoBehaviour
     /// </summary>
     public void StartItemLoader()
     {
-
         item_Part_Name = testCode_SaveManager.int_Name.ToString();
         item_Part_Count = testCode_SaveManager.item_int;
-        
-        if (item_Part_Count > 0)
+
+        if (startItemCheck == 0)
         {
-            GameObject gObjItem = NGUITools.AddChild(m_grid.gameObject, m_gObjSampleItem);
-            gObjItem.SetActive(true);
+            if (item_Part_Count > 0)
+            {
+                Debug.Log("활성");
+                item_Part_Name = testCode_SaveManager.int_Name.ToString();
+                item_Part_Count = testCode_SaveManager.item_int;
 
-            ItemScript itemScript = gObjItem.GetComponent<ItemScript>();
-            itemScript.SetInfo(item_Part_Name);
-            itemScript.SetInfo_1(item_Part_Count);
+                GameObject gObjItem = NGUITools.AddChild(m_grid.gameObject, m_gObjSampleItem);
+                gObjItem.SetActive(true);
 
-            m_grid.Reposition();
-            m_scrollView.ResetPosition();
-            
-            item_Sprite = m_grid.GetComponentsInChildren<UISprite>();
+                ItemScript itemScript = gObjItem.GetComponent<ItemScript>();
+                itemScript.SetInfo(item_Part_Name);
+                itemScript.SetInfo_1(item_Part_Count);
+
+                m_grid.Reposition();
+                m_scrollView.ResetPosition();
+
+                item_Sprite = m_grid.GetComponentsInChildren<UISprite>();
+            }
+        }
+        else
+        {
+            Debug.Log("비활성");
+
         }
     }
     /// <summary>
@@ -103,4 +128,51 @@ public class InventoryController : MonoBehaviour
     {
         TestCode_SaveManager.Instance.InvenSave();
     }   
+    public void PlayerUpgradeItemQuantity()
+    {
+        upgrade_Label[0].name = upgrade_Sprite[0].spriteName;
+        upgrade_Label[1].name = upgrade_Sprite[1].spriteName;
+        upgrade_Label[2].name = upgrade_Sprite[2].spriteName;
+
+        if (item_Sprite != null)
+        {
+            for (int i = 0; i < item_Sprite.Length; i++)
+            {
+                if (item_Sprite[i].spriteName == "1000")
+                {
+                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
+                    item_1 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                }
+                if (item_Sprite[i].spriteName == "1001")
+                {
+                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
+                    item_2 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                }
+                if (item_Sprite[i].spriteName == "1002")
+                {
+                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/2";
+                    item_3 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                }
+            }
+        }
+    }
+    public void WeaponUpgrade()
+    {
+        if (item_1 >= 5 && item_2 >= 5 && item_3 >= 2)
+        {
+            Debug.Log("업그레이드 버튼 활성화");
+            invenManager.GetItem(Inven_Item_Type.Material_A_Parts, -5);
+            invenManager.GetItem(Inven_Item_Type.Material_B_Mtr, -5);
+            invenManager.GetItem(Inven_Item_Type.Material_C_Money, -2);
+
+            PlayerPrefs.SetInt("Modelling", 1);
+            gameManager.ModellingCheck();
+            UpdateItemDetaDestroy();
+            startItemCheck = 0;
+        }
+        else
+        {
+            Debug.Log("업그레이드 버튼 비활성화");
+        }
+    }
 }

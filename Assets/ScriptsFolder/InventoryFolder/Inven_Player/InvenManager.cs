@@ -7,8 +7,7 @@ public class InvenManager : MonoBehaviour
     public GameObject[] invenObject;
 
     public UILabel[] money_LB;
-
-    public InventoryController itemCtrl;
+    
     public InvenVirtualJoysticks moveJoystick;
 
     public int settingCount;
@@ -36,6 +35,13 @@ public class InvenManager : MonoBehaviour
                 PlayerPrefs.SetInt("Money", 0);
             }
         }
+        if (Input.GetKeyDown(KeyCode.A))
+            GetItem(Inven_Item_Type.Material_A_Parts, 1);
+        if (Input.GetKeyDown(KeyCode.S))
+            GetItem(Inven_Item_Type.Material_B_Mtr, 1);
+        if (Input.GetKeyDown(KeyCode.D))
+            GetItem(Inven_Item_Type.Material_C_Money, 1);
+
     }
 
     /// <summary>
@@ -59,7 +65,7 @@ public class InvenManager : MonoBehaviour
     public void ItemWindowOn()
     {
         SaveInven();
-        //TestCode_SaveManager.Instance.Initialize();
+        TestCode_SaveManager.Instance.Initialize();
         item_Panel[0].gameObject.SetActive(true);
         invenObject[0].gameObject.SetActive(false);
         moveJoystick.JostickReset();
@@ -117,7 +123,7 @@ public class InvenManager : MonoBehaviour
     /// </summary>
     public void tTest_2()
     {
-        GetItem(Inven_Item_Type.Material_A_Mtr, Random.Range(1,5));
+        GetItem(Inven_Item_Type.Material_B_Mtr, Random.Range(1,5));
         Debug.Log("기본아이템 1~4개 획득");
     }
 
@@ -133,11 +139,7 @@ public class InvenManager : MonoBehaviour
     {
         TestCode_SaveManager.Instance.InvenSave();
     }
-
-    public void UpgradeButton()
-    {
-
-    }
+    
     public void StartSetting()
     {
         invenObject[0].gameObject.SetActive(false);
