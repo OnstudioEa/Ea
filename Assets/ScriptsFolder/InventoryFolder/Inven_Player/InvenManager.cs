@@ -41,6 +41,8 @@ public class InvenManager : MonoBehaviour
             GetItem(Inven_Item_Type.Material_B_Mtr, 1);
         if (Input.GetKeyDown(KeyCode.D))
             GetItem(Inven_Item_Type.Material_C_Money, 1);
+        if (Input.GetKeyDown(KeyCode.F))
+            TestCode_SaveManager.Instance.Initialize();
 
     }
 

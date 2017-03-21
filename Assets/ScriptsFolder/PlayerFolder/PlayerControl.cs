@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     float closestDistSqr;
     float dist;
     float dist_1;
-    float distPos;
+    public float distPos;
 
     public int hitCount;
 
@@ -90,8 +90,10 @@ public class PlayerControl : MonoBehaviour
             dist_1 = (obPos - weaponeObMin.transform.position).sqrMagnitude;
             if (dist < distPos || dist_1 < distPos)
             {
+                Debug.Log("때렸다1");
                 if (dist < closestDistSqr)
                 {
+                    Debug.Log("때렸다");
                     action[0].PlayerDamage();
                     if (attackCount_Effect == 1)
                         playerEffect[4].gameObject.SetActive(true);
@@ -233,7 +235,6 @@ public class PlayerControl : MonoBehaviour
     {
         motor.moveSpeed = 7;
         ani.SetBool("AttackMove", true);
-        Debug.Log("스피드 작용?");
     }
     public void MoveSpeedCheckOff()
     {
@@ -583,6 +584,12 @@ public class PlayerControl : MonoBehaviour
         {
             ani.speed = 1.25f;
         }
+    }
+    public void LoseEffect()
+    {
+        playerAttackData.taggedAction[4].gameObject.SetActive(true);
+        playerAttackData.uiPanel[1].gameObject.SetActive(true);
+        playerAttackData.lose_Time = 6;
     }
 }
 

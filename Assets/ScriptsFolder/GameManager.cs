@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
         {
             modelling[0].gameObject.SetActive(true);
             modelling[1].gameObject.SetActive(false);
-            Debug.Log("0");
         }
         else
         {
@@ -65,7 +64,6 @@ public class GameManager : MonoBehaviour
             {
                 modelling[0].gameObject.SetActive(false);
                 modelling[1].gameObject.SetActive(true);
-                Debug.Log("1");
             }
         }
     }

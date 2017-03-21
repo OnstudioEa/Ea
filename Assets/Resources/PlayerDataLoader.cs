@@ -40,7 +40,7 @@ public class PlayerDataLoader : Action
     private float    playerValue;
     //-------------------------------------------------Player HP
     public UISlider playerHPBar;
-    float            playerNowHP;
+    public float     playerNowHP;
     private float    playerHPValue;
     //-------------------------------------------------Animation
     public UISprite playerSkillBar;
@@ -48,10 +48,10 @@ public class PlayerDataLoader : Action
     public float     playerNowSkill;
     private float    playerValueSkill;
     //-------------------------------------------------Animation
-    int                 animationDelay_Monster;
+    int                        animationDelay_Monster;
     public MonsterShaderChange monsterShaderChange;
     public MonsterShaderChange monsterShaderChange_1;
-    int                 animationDelay_Player;
+    int                        animationDelay_Player;
     public MonsterShaderChange monsterShaderChange_3;
     public MonsterShaderChange monsterShaderChange_4;
     //-------------------------------------------------겨루기 관련
@@ -61,7 +61,7 @@ public class PlayerDataLoader : Action
 
     public Transform player_OB;
     public Transform monster_OB;
-    public float             groggyAttack_float;
+    public float      groggyAttack_float;
     public bool      groggyAttack_bool;
     //-------------------------------------------------궁
     BoxCollider ultimateColl;
@@ -71,6 +71,8 @@ public class PlayerDataLoader : Action
     float mt_float;
     public float mt_Time;
     float mt_float_1;
+    public float lose_Time;
+    bool lose_Check;
     //-------------------------------------------------크리티컬
     int     critical_Check;
     float    critical_Damage;
@@ -85,8 +87,12 @@ public class PlayerDataLoader : Action
     int     groggyCount;
     float    parts_HP;
     int     parts_Count;
-    public int buttonActionGayge;
+    public float buttonActionGayge;
     public GameObject partsOb;
+    //-------------------------------------------------ButtonAction
+    public UISlider btActionBar;
+    float btActionMax;
+    float btActionValue;
     //-------------------------------------------------라벨 관련
     public UILabel skill_Label_1;
     public UILabel skill_Label_2;
@@ -140,6 +146,9 @@ public class PlayerDataLoader : Action
         state = State.idle;
         StartCoroutine(FSM());
         DataLoader();
+
+        buttonActionGayge = btActionMax;
+        btActionMax = 200;
 
         monsterNowHP = monsterHp;
         playerNowHP = playerHp;
@@ -205,7 +214,7 @@ public class PlayerDataLoader : Action
         GroggyAndCompete();
     }
     public override void MonsterDamage()
-    {
+    {        
         if (playerNowSkill < 100)
             playerNowSkill += 2;
         else
@@ -292,7 +301,9 @@ public class PlayerDataLoader : Action
         // 플레이어 스킬 게이지
         playerValueSkill = playerNowSkill / (float)(playerMaxSkill);
         playerSkillBar.fillAmount = playerValueSkill;
-
+        // 버튼 액션 게이지
+        btActionValue = buttonActionGayge / (float)(btActionMax);
+        btActionBar.value = btActionValue;
         // 플레이어 방어
         if (ani_Player.GetBool("Move") == false && ani_Player.GetBool("Defend") == true && playerNowMP > 0)
         {
@@ -305,6 +316,22 @@ public class PlayerDataLoader : Action
         playerMP_Label.text = playerNowMP.ToString("f0") + "/" + playerMaxMP;
         monsterHP_Label.text = monsterNowHP.ToString("f0") + "/" + monsterHp;
         //몬스터 메터리얼 관련 죽은 후 셰이더
+        if (playerNowHP <= 0)
+        {
+            Debug.Log("짐");
+            lose_Check = true;
+            LoseGame();
+        }
+        if (lose_Time > 0)
+        {
+            lose_Time -= 0.1f;
+            if (lose_Time <= 0)
+            {
+                taggedAction[4].gameObject.SetActive(false);
+                uiPanel[0].gameObject.SetActive(true); //결과창
+                Time.timeScale = 0.3f;
+            }
+        }
         if (mt_Time > 0)
         {
             mt_Time -= 0.1f;
@@ -337,7 +364,7 @@ public class PlayerDataLoader : Action
             {
                 taggedAction[0].gameObject.SetActive(false);
                 taggedAction[3].gameObject.SetActive(false);
-                uiPanel[0].gameObject.SetActive(true);
+                uiPanel[0].gameObject.SetActive(true); //결과창
 
                 player_Mt[3].SetFloat("_node_3052", 1);
                 player_Mt[4].SetFloat("_node_3052", 1);
@@ -381,7 +408,7 @@ public class PlayerDataLoader : Action
     public void ButtonActionOn()
     {
         buttonActionGayge += 5;
-        if (buttonActionGayge >= 200)
+        if (buttonActionGayge >= 190)
         {
           //  Debug.Log("버튼액션 이김");
             motor.moveSpeed = 7;
@@ -401,7 +428,7 @@ public class PlayerDataLoader : Action
             monsterNowHP = 0;
             ani_Player.speed = 1f;
         }
-        if (buttonActionGayge <= 0)
+        if (buttonActionGayge <= 10)
         {
          //   Debug.Log("버튼액션 짐");
             motor.moveSpeed = 7;
@@ -523,6 +550,8 @@ public class PlayerDataLoader : Action
                 if (skill_Count == 1)
                 {
                     monsterNowHP -= playerPower * 1.8f;
+                    playerControl.playerEffect[15].gameObject.SetActive(true);
+                    playerControl.playerEffect[17].gameObject.SetActive(false);
                     return;
                 }
                 else
@@ -530,6 +559,8 @@ public class PlayerDataLoader : Action
                     if (skill_Count == 2)
                     {
                         monsterNowHP -= playerPower * 1.9f;
+                        playerControl.playerEffect[15].gameObject.SetActive(false);
+                        playerControl.playerEffect[16].gameObject.SetActive(true);
                         return;
                     }
                     else
@@ -538,6 +569,8 @@ public class PlayerDataLoader : Action
                         {
                             monsterNowHP -= playerPower * 2f;
                             skill_Count = 0;
+                            playerControl.playerEffect[16].gameObject.SetActive(false);
+                            playerControl.playerEffect[17].gameObject.SetActive(true);
                             return;
                         }
                     }
@@ -659,6 +692,14 @@ public class PlayerDataLoader : Action
                 monsterShaderChange_3.rend.sharedMaterial = monsterShaderChange_3.material[0];
                 monsterShaderChange_4.rend.sharedMaterial = monsterShaderChange_4.material[0];
             }
+        }
+    }
+    void LoseGame()
+    {
+        if (lose_Check == true)
+        {
+            playerControl.ani.SetBool("Died", true);
+            playerControl.ani.SetBool("AttackMove", false);
         }
     }
 }

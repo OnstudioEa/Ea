@@ -81,9 +81,8 @@ public class InventoryController : MonoBehaviour
         {
             if (item_Part_Count > 0)
             {
-                Debug.Log("활성");
-                item_Part_Name = testCode_SaveManager.int_Name.ToString();
-                item_Part_Count = testCode_SaveManager.item_int;
+                //item_Part_Name = testCode_SaveManager.int_Name.ToString();
+                //item_Part_Count = testCode_SaveManager.item_int;
 
                 GameObject gObjItem = NGUITools.AddChild(m_grid.gameObject, m_gObjSampleItem);
                 gObjItem.SetActive(true);
@@ -100,8 +99,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            Debug.Log("비활성");
-
+            return;
         }
     }
     /// <summary>
@@ -142,16 +140,28 @@ public class InventoryController : MonoBehaviour
                 {
                     upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
                     item_1 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                    if (item_1 <= 0)
+                    {
+                        upgrade_Label[i].text = "0/5";
+                    }
                 }
                 if (item_Sprite[i].spriteName == "1001")
                 {
                     upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
                     item_2 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                    if (item_2 <= 0)
+                    {
+                        upgrade_Label[i].text = "0/5";
+                    }
                 }
                 if (item_Sprite[i].spriteName == "1002")
                 {
                     upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/2";
                     item_3 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
+                    if (item_3 <= 0)
+                    {
+                        upgrade_Label[i].text = "0/5";
+                    }
                 }
             }
         }
@@ -160,7 +170,6 @@ public class InventoryController : MonoBehaviour
     {
         if (item_1 >= 5 && item_2 >= 5 && item_3 >= 2)
         {
-            Debug.Log("업그레이드 버튼 활성화");
             invenManager.GetItem(Inven_Item_Type.Material_A_Parts, -5);
             invenManager.GetItem(Inven_Item_Type.Material_B_Mtr, -5);
             invenManager.GetItem(Inven_Item_Type.Material_C_Money, -2);
@@ -174,7 +183,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            Debug.Log("업그레이드 버튼 비활성화");
+            return;
         }
     }
 }

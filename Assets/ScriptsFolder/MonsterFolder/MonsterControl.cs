@@ -228,7 +228,6 @@ public class MonsterControl : MonoBehaviour
                 ani.SetBool("BackAttack", true);
                 attackDist = 1;
                 attackDist_1 = 50;
-                Debug.Log("1");
                 return;
             }
             else
@@ -238,7 +237,6 @@ public class MonsterControl : MonoBehaviour
                     attackDist = 2;
                     attackDist_1 = 180;
                     ani.SetBool("Attack2", true);
-                    Debug.Log("2");
                     state = State.move;
                     return;
                 }
@@ -250,7 +248,6 @@ public class MonsterControl : MonoBehaviour
                         attackDist = 1;
                         attackDist_1 = 150;
                         ani.SetBool("Attack1", true);
-                        Debug.Log("3");
                         return;
                     }
                     if (attackNumber == 2)
@@ -258,7 +255,6 @@ public class MonsterControl : MonoBehaviour
                         attackDist = 40;
                         attackDist_1 = 40;
                         ani.SetBool("Attack3", true);
-                        Debug.Log("4");
                         return;
                     }
                 }

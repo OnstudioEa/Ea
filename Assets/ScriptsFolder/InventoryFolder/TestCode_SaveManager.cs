@@ -197,7 +197,6 @@ public class TestCode_SaveManager : Singleton<TestCode_SaveManager>
             }
         }
         inventoryCon.startItemCheck = 1;
-        Debug.Log("test");
         return true;
     }
 
