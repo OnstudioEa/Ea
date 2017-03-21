@@ -166,7 +166,9 @@ public class InventoryController : MonoBehaviour
             invenManager.GetItem(Inven_Item_Type.Material_C_Money, -2);
 
             PlayerPrefs.SetInt("Modelling", 1);
+            SaveInven();
             gameManager.ModellingCheck();
+            PlayerUpgradeItemQuantity();
             UpdateItemDetaDestroy();
             startItemCheck = 0;
         }
