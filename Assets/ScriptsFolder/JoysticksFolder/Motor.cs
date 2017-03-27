@@ -52,7 +52,10 @@ public class Motor : MonoBehaviour
                     playerControl.AttackActionLook();
                 }
                 else
+                {
                     FaceMovementDirection();
+                    playerControl.movingSound.enabled = true;
+                }
             }
         }
         yield return new WaitForEndOfFrame();

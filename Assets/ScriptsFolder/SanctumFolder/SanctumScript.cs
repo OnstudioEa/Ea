@@ -14,8 +14,10 @@ public class SanctumScript : MonoBehaviour {
     public GameObject[] monsters;
 
     public int channerCount;
+    GameManager gameManager;
 
     void Awake () {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         channerCount = 1;
         StageStartButton();
@@ -68,6 +70,13 @@ public class SanctumScript : MonoBehaviour {
                 spritOb[0].gameObject.SetActive(true);
                 stage_Panel.gameObject.SetActive(false);
                 return;
+            }
+            else
+            {
+                if (channerCount == 1)
+                {
+                    gameManager.InvenStartButton();
+                }
             }
         }
     }

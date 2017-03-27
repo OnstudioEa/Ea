@@ -130,7 +130,8 @@ public class InventoryController : MonoBehaviour
     {
         upgrade_Label[0].name = upgrade_Sprite[0].spriteName;
         upgrade_Label[1].name = upgrade_Sprite[1].spriteName;
-        upgrade_Label[2].name = upgrade_Sprite[2].spriteName;
+
+        upgrade_Label[2].text = PlayerPrefs.GetInt("Money").ToString() + "/15000";
 
         if (item_Sprite != null)
         {
@@ -138,41 +139,32 @@ public class InventoryController : MonoBehaviour
             {
                 if (item_Sprite[i].spriteName == "1000")
                 {
-                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
+                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/2";
                     item_1 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
                     if (item_1 <= 0)
                     {
-                        upgrade_Label[i].text = "0/5";
+                        upgrade_Label[i].text = "0/2";
                     }
                 }
                 if (item_Sprite[i].spriteName == "1001")
                 {
-                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/5";
+                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/7";
                     item_2 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
                     if (item_2 <= 0)
                     {
-                        upgrade_Label[i].text = "0/5";
+                        upgrade_Label[i].text = "0/7";
                     }
-                }
-                if (item_Sprite[i].spriteName == "1002")
-                {
-                    upgrade_Label[i].text = item_Sprite[i].GetComponent<ItemScript>().m_label.text + "/2";
-                    item_3 = int.Parse(item_Sprite[i].GetComponent<ItemScript>().m_label.text);
-                    if (item_3 <= 0)
-                    {
-                        upgrade_Label[i].text = "0/5";
-                    }
-                }
+                }                
             }
         }
     }
     public void WeaponUpgrade()
     {
-        if (item_1 >= 5 && item_2 >= 5 && item_3 >= 2)
+        if (item_1 >= 2 && item_2 >= 7 && PlayerPrefs.GetInt("Money") >= 15000)
         {
-            invenManager.GetItem(Inven_Item_Type.Material_A_Parts, -5);
-            invenManager.GetItem(Inven_Item_Type.Material_B_Mtr, -5);
-            invenManager.GetItem(Inven_Item_Type.Material_C_Money, -2);
+            invenManager.GetItem(Inven_Item_Type.Material_A_Parts, -2);
+            invenManager.GetItem(Inven_Item_Type.Material_B_Mtr, -7);
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") -15000);
 
             PlayerPrefs.SetInt("Modelling", 1);
             SaveInven();

@@ -35,6 +35,9 @@ public class MonsterControl : MonoBehaviour
     //----------------데미지 전달
     public GameObject   taggedAction;
     List<Action> action = new List<Action>();
+    
+    public AudioSource movingSound;
+    public AudioClip[] monster_Sound;
 
     public PlayerDataLoader playerdataLoader;
     PlayerControl playerControl;
@@ -49,6 +52,8 @@ public class MonsterControl : MonoBehaviour
         targetPlayer = GameObject.Find("Player");
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
         ani_Player = GameObject.Find("Player").GetComponent<Animator>();
+
+        movingSound.enabled = false;
 
         monsterEffect[0].gameObject.SetActive(false);
 
@@ -151,6 +156,7 @@ public class MonsterControl : MonoBehaviour
                 {
                     monsterEffect[3].gameObject.SetActive(false);
                     monsterEffect[4].gameObject.SetActive(false);
+                    movingSound.enabled = false;
                     ani.SetBool("Move", false);
                     state = State.idle;
                     return;
@@ -170,6 +176,7 @@ public class MonsterControl : MonoBehaviour
                     else
                     {
                         ani.SetBool("Move", true);
+                        movingSound.enabled = true;
                         lookDir = (target.position - this.trans.position);
                         lookDir.Normalize();
 
@@ -220,6 +227,7 @@ public class MonsterControl : MonoBehaviour
     {
         ani.SetBool("Idle", false);
         ani.SetBool("Move", false);
+        movingSound.enabled = false;
         if (attackCheck == true)
         {
             attackCheck = false;
@@ -354,6 +362,10 @@ public class MonsterControl : MonoBehaviour
     public void AttackEffectEnd()
     {
         monsterEffect[0].gameObject.SetActive(false);
+
+        monsterEffect[3].gameObject.SetActive(false);
+        monsterEffect[4].gameObject.SetActive(false);
+        movingSound.enabled = false;
     }
     /// <summary>
     /// 그로기 종료
@@ -402,6 +414,7 @@ public class MonsterControl : MonoBehaviour
     public void MonsterDiedStart()
     {
         playerdataLoader.mt_Time = 7;
+        AudioSource.PlayClipAtPoint(monster_Sound[0], transform.position, 0.5f);
     }
     /// <summary>
     /// 겨루기 검 이펙트

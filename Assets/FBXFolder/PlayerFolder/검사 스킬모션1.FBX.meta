@@ -227,6 +227,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0
+        functionName: SkillEffect
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.17675728
+        functionName: Skill1_1
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.19288164
         functionName: AttackHit
         data: 
@@ -234,8 +248,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.30152372
+      - time: 0.282313
+        functionName: Skill1_2
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.29796502
         functionName: AttackHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5800146
+        functionName: Skill1_3
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -257,13 +285,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.951172
         functionName: MoveSpeedCheck
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0
-        functionName: SkillEffect
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

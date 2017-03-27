@@ -60,7 +60,10 @@ public class VirtualJoysticks : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     public virtual void OnPointerUp(PointerEventData ped)
     {
         playerControl.ani.SetBool("Move", false);
+
         playerControl.playerEffect[14].gameObject.SetActive(false);
+        playerControl.movingSound.enabled = false;
+
         motor.state = Motor.State.idle;
         inputVector = Vector3.zero;
         joystickImg.rectTransform.anchoredPosition = Vector3.zero;

@@ -11,10 +11,11 @@ public class InvenManager : MonoBehaviour
     public InvenVirtualJoysticks moveJoystick;
 
     public int settingCount;
-    
+    int m;
+
     void Awake()
     {
-        // PlayerPrefs.DeleteAll(); 초기화
+    //    PlayerPrefs.DeleteAll(); //초기화
         StartSetting();
 
         item_Panel[0].gameObject.SetActive(false);
@@ -39,10 +40,12 @@ public class InvenManager : MonoBehaviour
             GetItem(Inven_Item_Type.Material_A_Parts, 1);
         if (Input.GetKeyDown(KeyCode.S))
             GetItem(Inven_Item_Type.Material_B_Mtr, 1);
-        if (Input.GetKeyDown(KeyCode.D))
-            GetItem(Inven_Item_Type.Material_C_Money, 1);
+        //if (Input.GetKeyDown(KeyCode.D))
+        //    GetItem(Inven_Item_Type.Material_C_Money, 1);
         if (Input.GetKeyDown(KeyCode.F))
             TestCode_SaveManager.Instance.Initialize();
+        if (Input.GetKeyDown(KeyCode.G))
+            SaveInven();
 
     }
 
@@ -51,22 +54,21 @@ public class InvenManager : MonoBehaviour
     /// </summary>
     public void MoneyGet()
     {
-        int m;
-        m = Random.Range(300, 700);
+        m = Random.Range(4500, 5500);
         PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") + m);
         money_LB[0].text = PlayerPrefs.GetInt("Money").ToString(); //인게임에 적용시켜야 오류없음
-        money_LB[1].text = m.ToString();
+       // Debug.Log("돈 4500~5500");
     }
     public void UpgradeWindowOn()
     {
-        SaveInven();
+        //SaveInven();
         item_Panel[1].gameObject.SetActive(true);
         invenObject[0].gameObject.SetActive(false);
         moveJoystick.JostickReset();
     }
     public void ItemWindowOn()
     {
-        SaveInven();
+        //SaveInven();
         TestCode_SaveManager.Instance.Initialize();
         item_Panel[0].gameObject.SetActive(true);
         invenObject[0].gameObject.SetActive(false);
@@ -118,15 +120,15 @@ public class InvenManager : MonoBehaviour
     public void Parts_Get()
     {
         GetItem(Inven_Item_Type.Material_A_Parts, 1);
-        Debug.Log("부분파괴 아이템 습득");
+       // Debug.Log("부분파괴 아이템 습득");
     }
     /// <summary>
     /// 기본적으로 얻는 아이템
     /// </summary>
     public void tTest_2()
     {
-        GetItem(Inven_Item_Type.Material_B_Mtr, Random.Range(1,5));
-        Debug.Log("기본아이템 1~4개 획득");
+        GetItem(Inven_Item_Type.Material_B_Mtr, Random.Range(2,4));
+       // Debug.Log("기본아이템 2~3개 획득");
     }
 
     public void GetItem(Inven_Item_Type type, int count)
@@ -141,7 +143,7 @@ public class InvenManager : MonoBehaviour
     {
         TestCode_SaveManager.Instance.InvenSave();
     }
-    
+
     public void StartSetting()
     {
         invenObject[0].gameObject.SetActive(false);

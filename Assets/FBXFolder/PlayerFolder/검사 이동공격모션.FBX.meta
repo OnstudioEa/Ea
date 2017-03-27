@@ -227,6 +227,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.05296467
+        functionName: Attack_3
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.06588298
         functionName: AttackStart
         data: 
@@ -243,6 +250,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.17467774
         functionName: OnAttack_B
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3495739
+        functionName: Attack_1
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

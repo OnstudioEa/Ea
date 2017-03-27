@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     GameObject targetMonster;
     GameObject weaponeSlash;
 
+    public AudioSource movingSound;
+
     public GameObject[] camObject;
 
     Transform target;
@@ -35,12 +37,8 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject[] playerEffect;
     public GameObject[] player_Defend_Effect;
-    public AudioClip[]  player_Sound;
-    int                 player_Sound_Count;
     int                 player_Effect_Count;
-
-    AudioClip test;
-
+    
     public int          attackCount_Effect;
 
     public GameObject   taggedAction;
@@ -48,6 +46,7 @@ public class PlayerControl : MonoBehaviour
 
     PlayerDataLoader        playerAttackData;
     VirtualJoysticks        virtualjoystick;
+    PlayerSoundManager      soundManager;
     public Motor            motor;
     
     void Awake()
@@ -59,10 +58,13 @@ public class PlayerControl : MonoBehaviour
         playerAttackData = GameObject.Find("GameManager").GetComponent<PlayerDataLoader>();
         virtualjoystick = GameObject.Find("BackgroundImage").GetComponent<VirtualJoysticks>();
 
+        soundManager = GetComponent<PlayerSoundManager>();
         weaponeObMax = GameObject.Find("B");
         weaponeObMin = GameObject.Find("A");
         targetMonster = GameObject.Find("Monster");
         weaponeSlash = GameObject.Find("trail_bone");
+
+        movingSound.enabled = false;
         
         target = targetMonster.transform;
         trans = gameObject.transform;
@@ -90,10 +92,8 @@ public class PlayerControl : MonoBehaviour
             dist_1 = (obPos - weaponeObMin.transform.position).sqrMagnitude;
             if (dist < distPos || dist_1 < distPos)
             {
-                Debug.Log("때렸다1");
                 if (dist < closestDistSqr)
                 {
-                    Debug.Log("때렸다");
                     action[0].PlayerDamage();
                     if (attackCount_Effect == 1)
                         playerEffect[4].gameObject.SetActive(true);
@@ -229,7 +229,8 @@ public class PlayerControl : MonoBehaviour
     public void AttackHit()
     {
         TargetCheck();
-        PlayerSound();
+        if (ani.GetBool("Skill2") == true)
+            soundManager.Skill2_1();
     }
     public void MoveSpeedCheck()
     {
@@ -559,18 +560,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetBool("Win", false);
         ani.SetBool("Lose", false);
     }
-    /// <summary>
-    /// 공격 사운드 관련
-    /// </summary>
-    public void PlayerSound()
-    {
-        player_Sound_Count = Random.Range(0, 2);
-        if (player_Sound_Count == 0)
-            AudioSource.PlayClipAtPoint(player_Sound[0], trans.position);
-        else
-            if (player_Sound_Count == 1)
-            AudioSource.PlayClipAtPoint(player_Sound[1], trans.position);
-    }
+    
     public void CutActionCtrlButtonOn()
     {
         playerAttackData.sliderPanel.gameObject.SetActive(true);

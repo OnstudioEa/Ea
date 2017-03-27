@@ -369,8 +369,8 @@ public class PlayerDataLoader : Action
                 player_Mt[3].SetFloat("_node_3052", 1);
                 player_Mt[4].SetFloat("_node_3052", 1);
                 player_Mt[5].SetFloat("_node_3052", 1);
-                invenManager.tTest_2(); // 기본아이템 획득
-                invenManager.MoneyGet(); // 300 ~ 699 돈 획득
+                invenManager.tTest_2(); // 기본아이템 획득 2~3EA
+                invenManager.MoneyGet(); // 4500 ~ 5500 돈 획득
                 invenManager.SaveInven(); //아이템 저장
             }
         }
@@ -392,6 +392,9 @@ public class PlayerDataLoader : Action
                     float dist = Vector3.Distance(monster_OB.position, player_OB.position);
                     if (dist <= 1)
                     {
+                        playerControl.playerEffect[14].gameObject.SetActive(false);
+                        playerControl.movingSound.enabled = false;
+
                         ani_Monster.SetBool("GroggyAttack", true);
                         playerControl.AttackLook();
                         monsterControl.AttackLook();
